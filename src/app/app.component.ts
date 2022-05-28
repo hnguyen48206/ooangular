@@ -8,21 +8,28 @@ import { GeneralService } from './services/general.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  externalJS = [
+    "assets/js/vendor.min.js",
+    "assets/js/app.min.js"
+  ];
+
   constructor(private generalService: GeneralService, private router: Router) { }
 
-  public loadJsFile(url) {  
-    const body = <HTMLDivElement> document.body;
+  public loadJsFile(url) {
+    const body = <HTMLDivElement>document.body;
     const script = document.createElement('script');
     script.innerHTML = '';
     script.src = url;
     script.async = false;
     script.defer = true;
     body.appendChild(script);
-  } 
+  }
 
   ngOnInit(): void {
-     this.loadJsFile("assets/js/vendor.min.js");  
-    this.loadJsFile("assets/js/app.min.js");
+    for (let i = 0; i < this.externalJS.length; ++i) {
+      this.loadJsFile(this.externalJS[i]);
+    }
     this.getSavedUserInfo();
     this.loadConfigFile();
   }
@@ -44,7 +51,7 @@ export class AppComponent implements OnInit {
       req.send();
     } catch (error) {
       console.log('Get config Failed')
-    }   
+    }
   }
 
   async getSavedUserInfo() {
