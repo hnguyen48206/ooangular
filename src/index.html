@@ -1,29 +1,56 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Oonew</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">  
-   <!-- App css -->
-   <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-   <link href="assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
-   <link href="assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-     
-    <!-- third party css -->
-    <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- third party css end -->
-  </head>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- App css -->
+  <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
+  <link href="assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+
+  <!-- third party css -->
+  <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+  <!-- third party css end -->
+
+</head>
+
 <body>
+ 
   <app-root></app-root>
   <!-- bundle -->
-  <script src="assets/js/vendor.min.js"></script>
-  <script src="assets/js/app.min.js"></script>
-  <!-- third party js -->
-  <script src="assets/js/vendor/apexcharts.min.js"></script>
+  <!-- <script src="assets/js/vendor/apexcharts.min.js"></script>
   <script src="assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-  <script src="assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-     <!-- third party js ends -->
+  <script src="assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script> -->
+  <!-- third party js ends -->
+
+  <!-- <script>
+    docReady(function () {
+      // DOM is loaded and ready for manipulation here
+      loadJsFile("assets/js/vendor.min.js");
+      loadJsFile("assets/js/app.min.js");
+    });
+
+    function loadJsFile(url) {
+      let node = document.createElement('script');
+      node.src = url;
+      node.type = 'text/javascript';
+      document.getElementsByTagName('body')[0].appendChild(node);
+    }
+
+    function docReady(fn) {
+      // see if DOM is already available
+      if (document.readyState === "complete" || document.readyState === "interactive") {
+        // call on next available tick
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }  
+  </script> -->
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeneralService } from './services/general.service';
 
@@ -7,15 +7,29 @@ import { GeneralService } from './services/general.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private generalService: GeneralService, private router: Router) { }
+
+  public loadJsFile(url) {  
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
+  } 
+
   ngOnInit(): void {
+     this.loadJsFile("assets/js/vendor.min.js");  
+    this.loadJsFile("assets/js/app.min.js");
     this.getSavedUserInfo();
     this.loadConfigFile();
   }
   ngAfterViewInit(): void {
     // window.moveTo(0, 0);
-    // window.resizeTo(screen.availWidth, screen.availHeight)
+    // window.resizeTo(screen.availWidth, screen.availHeight)   
+    this.router.initialNavigation();
   }
 
   loadConfigFile() {
@@ -43,7 +57,6 @@ export class AppComponent {
       console.log('Ko có thông tin local của user')
     }
     finally {
-      this.router.initialNavigation();
     }
   }
 
