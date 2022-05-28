@@ -34,9 +34,7 @@ export class AppComponent implements OnInit {
     this.loadConfigFile();
   }
   ngAfterViewInit(): void {
-    // window.moveTo(0, 0);
-    // window.resizeTo(screen.availWidth, screen.availHeight)   
-    this.router.initialNavigation();
+     this.router.initialNavigation();
   }
 
   loadConfigFile() {
