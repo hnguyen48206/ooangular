@@ -9,7 +9,8 @@ import { timeout, catchError } from 'rxjs/operators';
 })
 export class ApiservicesService {
   apiLists = {
-    login: '/api/Users/token'
+    login: '/api/Users/token',
+    getUserByID: 'api/Users/GetUserByUserId/'
   }
 
   constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
@@ -17,9 +18,9 @@ export class ApiservicesService {
   defaultTimeout = 10000
   httpCall(url, header, body, method) {
     url = this.generalService.appConfig.API_BASE_URL + url;
-    // if (this.generalService.userData != null) {
-    //   header['Authorization'] = 'Bearer ' + this.generalService.userData.token;
-    // }
+    if (this.generalService.userData != null) {
+      header['Authorization'] = 'Bearer ' + this.generalService.userData.token;
+    }
     return new Promise((resolve, reject) => {
       //use angular http        
       if (method == 'get') {

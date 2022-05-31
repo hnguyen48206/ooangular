@@ -14,6 +14,7 @@ export class GeneralService {
   {
     this.isLogin=false;
     localStorage.removeItem('userData');
+    this.userData = null;
     this.router.navigate(['/home'], {queryParams: {clearHistory: true }});
   }
 

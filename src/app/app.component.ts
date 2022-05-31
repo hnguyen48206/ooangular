@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
     "assets/js/app.min.js"
   ];
 
-  constructor(private generalService: GeneralService, private router: Router) { }
+  constructor(public generalService: GeneralService, private router: Router) { }
 
   public loadJsFile(url) {
     const body = <HTMLDivElement>document.body;
@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
     this.loadConfigFile();
   }
   ngAfterViewInit(): void {
-     this.router.initialNavigation();
   }
 
   loadConfigFile() {
@@ -52,16 +51,19 @@ export class AppComponent implements OnInit {
     }
   }
 
-  async getSavedUserInfo() {
-    let userData = await localStorage.getItem('userData');
+  getSavedUserInfo() {
+    let userData =  localStorage.getItem('userData');
+    let isRememberLogin =  localStorage.getItem('isRememberLogin');
+
     try {
-      if (userData) {
+      if (userData!=null && isRememberLogin!=null && isRememberLogin=='1') {
         this.generalService.isLogin = true;
       }
     } catch (error) {
       console.log('Ko có thông tin local của user')
     }
     finally {
+      this.router.initialNavigation();
     }
   }
 

@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UtilitiesModule } from './utilities/utilities.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,10 +17,16 @@ import { FormsModule } from '@angular/forms';
     HomeComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    UtilitiesModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      tapToDismiss: true
+    }), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

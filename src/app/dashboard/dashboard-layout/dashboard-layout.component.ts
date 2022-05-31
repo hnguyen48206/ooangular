@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(public generalServ: GeneralService) { }
 
   ngOnInit(): void {
   }
