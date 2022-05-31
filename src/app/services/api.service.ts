@@ -33,8 +33,7 @@ export class ApiservicesService {
             })
           )
           .subscribe(res => {
-            let result = <any>res;
-            console.log(result);
+            console.log(res);
             resolve(res);
           }, (err) => {
             reject(err);
@@ -49,6 +48,7 @@ export class ApiservicesService {
             })
           )
           .subscribe(res => {
+            console.log(res);
             resolve(res);
           }, (err) => {
             reject(err);
@@ -103,4 +103,38 @@ export class ApiservicesService {
   }
 
 
+  async initDataFromServer()
+  {
+    this.getUserInfo();
+    this.getAllUsers(null, null);
+  }
+
+  async getUserInfo() {
+    try {
+      let res = await this.httpCall(this.apiLists.getUserByID + this.generalService.userData.userID, {}, {}, 'get')
+      let result = <any>res
+      if (result.succeeded) {
+        this.generalService.currentUser = result.data;
+      }
+    } catch (error) {
+
+    }
+  }
+
+  async getAllUsers(pageNum, pageSize) {
+    try {
+      if (pageNum == null || pageSize == null) {
+        pageNum = 1; pageSize = 1000;
+      }
+      let res = await this.httpCall(this.apiLists.getAllUsers, {}, {
+        PageNumber: pageNum, PageSize: pageSize
+      }, 'get')
+      let result = <any>res
+      if (result.succeeded) {
+        this.generalService.allUsers = result.data;
+      }
+    } catch (error) {
+
+    }
+  }
 }

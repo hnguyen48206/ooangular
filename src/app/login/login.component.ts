@@ -11,20 +11,19 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  username='administrator';
-  password='oo';
-  isRememberPassword=true;
-  isLoggingIn=false;
+  username = 'administrator';
+  password = 'oo';
+  isRememberPassword = true;
+  isLoggingIn = false;
 
   constructor(private toaster: ToastrService, private router: Router, private generalService: GeneralService, private api: ApiservicesService) { }
 
   ngOnInit(): void {
-    if(this.generalService.isLogin)
-    this.router.navigate(['/home'])
+    if (this.generalService.isLogin)
+      this.router.navigate(['/home'])
   }
   async login() {
-    if(!this.isLoggingIn)
-    {
+    if (!this.isLoggingIn) {
       this.isLoggingIn = true
       try {
         let res = await this.api.httpCall(this.api.apiLists.login, {}, {
@@ -36,52 +35,28 @@ export class LoginComponent implements OnInit {
         });
 
         console.log(res)
-        localStorage.setItem('userData', JSON.stringify(res));
-        if(this.isRememberPassword)
-        localStorage.setItem('isRememberLogin', '1');
+        let result = <any>res
+        result['password'] = this.password
+        localStorage.setItem('userData', JSON.stringify(result));
+        if (this.isRememberPassword)
+          localStorage.setItem('isRememberLogin', '1');
         else
-        localStorage.setItem('isRememberLogin', '0');
-  
-        this.generalService.userData = res;
+          localStorage.setItem('isRememberLogin', '0');
+
+        this.generalService.userData = result;
         this.generalService.isLogin = true;
         this.router.navigate(['/home']);
-        this.getUserInfo();
+        this.api.initDataFromServer();
       } catch (error) {
         this.toaster.error('', 'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.', {
           timeOut: 3000,
         });
       }
-      finally{
+      finally {
         this.isLoggingIn = false
       }
     }
-    
-  
   }
 
-  async getUserInfo()
-  {
-    try {
-      let res = await this.api.httpCall(this.api.apiLists.getUserByID + this.username, {}, {}, 'get')
-      console.log(res)
-    } catch (error) {
-      
-    }
-  }
-
-  async getAllUsers(pageNum, pageSize)
-  {
-    try {
-      if(pageNum==null || pageSize ==null)
-      {
-        pageNum=1; pageSize=1000;
-      }
-      let res = await this.api.httpCall(this.api.apiLists.getAllUsers, {}, {
-        PageNumber: pageNum, PageSize:pageSize
-      }, 'get')
-      console.log(res)
-    } catch (error) {
-      
-    }
-  }
+ 
 }
