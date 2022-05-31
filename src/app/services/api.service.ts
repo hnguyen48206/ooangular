@@ -10,7 +10,8 @@ import { timeout, catchError } from 'rxjs/operators';
 export class ApiservicesService {
   apiLists = {
     login: '/api/Users/token',
-    getUserByID: 'api/Users/GetUserByUserId/'
+    getUserByID: '/api/Users/GetUserByUserId/',
+    getAllUsers: '/api/Users/GetAllUsers'
   }
 
   constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
@@ -24,7 +25,7 @@ export class ApiservicesService {
     return new Promise((resolve, reject) => {
       //use angular http        
       if (method == 'get') {
-        this.httpClient.get(url, { headers: header })
+        this.httpClient.get(url, { headers: header, params: body })
           .pipe(
             timeout(this.defaultTimeout),
             catchError(e => {
