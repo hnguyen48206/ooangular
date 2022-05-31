@@ -69,11 +69,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  async getAllUsers(page)
+  async getAllUsers(pageNum, pageSize)
   {
     try {
+      if(pageNum==null || pageSize ==null)
+      {
+        pageNum=1; pageSize=1000;
+      }
       let res = await this.api.httpCall(this.api.apiLists.getAllUsers, {}, {
-        PageNumber: 1, PageSize:100
+        PageNumber: pageNum, PageSize:pageSize
       }, 'get')
       console.log(res)
     } catch (error) {
