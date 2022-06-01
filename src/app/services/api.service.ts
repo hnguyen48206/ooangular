@@ -11,7 +11,8 @@ export class ApiservicesService {
   apiLists = {
     login: '/api/Users/token',
     getUserByID: '/api/Users/GetUserByUserId/',
-    getAllUsers: '/api/Users/GetAllUsers'
+    getAllUsers: '/api/Users/GetAllUsers',
+    updateUserInfo: '/api/Users/UpdateUser'
   }
 
   constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {

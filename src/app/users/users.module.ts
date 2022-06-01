@@ -5,7 +5,8 @@ import { UserhomeComponent } from './userhome/userhome.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { HelpComponent } from './help/help.component';
-
+import { FormsModule } from '@angular/forms';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { HelpComponent } from './help/help.component';
   imports: [
     CommonModule,
     UsersRouting,
+    FormsModule,
+    AngularMyDatePickerModule
   ]
 })
 export class UsersModule { }

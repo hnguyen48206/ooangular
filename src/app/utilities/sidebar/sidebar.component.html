@@ -3,9 +3,10 @@
 
     <div class="leftbar-user">
         <a href="javascript: void(0);">
-            <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
-            <span class="leftbar-user-name">Dominic Keller</span>
-        </a>
+            <img height="42" style="margin-bottom: 10px;" *ngIf="generalService.currentUser!=null" (error)="generalService.setDefaultAvatar($event)" [src]="generalService.imageLinkSetup(generalService.currentUser.hinhDaiDien)" alt="user-image" height="42" class="rounded-circle shadow-sm"><br>
+            <span class="account-user-name" *ngIf="generalService.currentUser==null"></span>
+            <span style="font-weight: bold " class="account-user-name" *ngIf="generalService.currentUser!=null">{{generalService.currentUser.fullName}}</span>
+       </a>
     </div>
 
     <!--- Sidemenu -->

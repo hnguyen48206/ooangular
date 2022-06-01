@@ -1,1 +1,86 @@
-<p>personal-info works!</p>
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Thông Tin Cá Nhân</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <form class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">Họ và Tên: </label>
+                                <span style="margin-left: 10px;">{{generalService.currentUser.fullName}}</span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom02">Phòng Ban: </label>
+                                <span style="margin-left: 10px;">{{generalService.currentUser.groupChinhName}}</span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom02">Chức Danh:
+                                    {{generalService.currentUser.title}}</label>
+                                <input [(ngModel)]="title" class="form-control" runat="server" name="title" type="text"
+                                    id="title" placeholder="">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày Sinh:</label>
+
+                                <div class="input-group">
+                                    <!-- input box -->
+                                    <input class="form-control" name="mydate" placeholder="Chọn ngày"
+                                        angular-mydatepicker #dp="angular-mydatepicker" [(ngModel)]="birthDate"
+                                        [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" />
+
+                                    <!-- clear date button -->
+                                    <div class="input-group-append">
+                                        <button class="btn btn-danger" *ngIf="birthDate" (click)="dp.clearDate()">
+                                            <i class="uil-multiply"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- toggle calendar button -->
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" (click)="dp.toggleCalendar()">
+                                            <i class="uil-calender"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input [(ngModel)]="email" class="form-control" runat="server" name="email" type="email"
+                                    id="email" placeholder="">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Số Điện Thoại</label>
+                                <input [(ngModel)]="phonenumber" class="form-control" runat="server" name="phonenumber"
+                                    type="tel" id="phonenumber" placeholder="">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ảnh Đại Diện</label>
+                                <input type="file" accept='image/*' class="form-control">
+                            </div>
+                            <button (click)="updateUserInfo()" class="btn btn-primary" type="submit">Lưu Thông
+                                Tin</button>
+                        </form>
+
+                    </div> <!-- end card-body -->
+                </div>
+
+            </div>
+        </div><!-- end col -->
+    </div><!-- end row -->
+    <!-- end row -->
+
+</div>

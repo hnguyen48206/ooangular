@@ -12,7 +12,14 @@ export class GeneralService {
   currentUser
   allUsers
   constructor(private router: Router) { }
-
+  setDefaultAvatar(e)
+  {
+    e.target.src = 'assets/imgs/defaultAvatar.png'
+  }
+  imageLinkSetup(imgName)
+  {
+    return this.appConfig.API_BASE_URL + '/' + imgName;
+  }
   logout()
   {
     this.isLogin=false;

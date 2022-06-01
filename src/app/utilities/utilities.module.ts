@@ -19,7 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,    
   ]
 })
 export class UtilitiesModule { }
