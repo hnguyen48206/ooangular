@@ -66,13 +66,13 @@
         <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#sidebarWorks" aria-expanded="false" aria-controls="sidebarEmail" class="side-nav-link">
                 <i class="uil-calendar-alt"></i>
-                <span> Lịch Tuần </span>
+                <span> Công Việc </span>
                 <span class="menu-arrow"></span>
             </a>
             <div class="collapse" id="sidebarWorks">
                 <ul class="side-nav-second-level">
                     <li>
-                        <a >Đã Duyệt</a>
+                        <a (click)="routeNavigator('/tasks')">Danh Sách Công Việc</a>
                     </li>
                     <li>
                         <a >Chưa Duyệt</a>

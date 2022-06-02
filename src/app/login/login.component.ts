@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         let res = await this.api.httpCall(this.api.apiLists.login, {}, {
           "username": this.username,
           "password": this.password
-        }, 'post');
+        }, 'post', true);
         this.toaster.success('', 'Đăng nhập thành công!', {
           timeOut: 2000,
         });
@@ -48,9 +48,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
         this.api.initDataFromServer();
       } catch (error) {
-        this.toaster.error('', 'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.', {
-          timeOut: 3000,
-        });
       }
       finally {
         this.isLoggingIn = false

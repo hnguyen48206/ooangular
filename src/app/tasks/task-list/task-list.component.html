@@ -1,0 +1,105 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Danh Sách Công Việc</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+
+
+    <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
+        <li (click)="changeTabs('assigned')" class="nav-item">
+            <a data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
+                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                <span class="d-none d-md-block">Được Giao</span>
+            </a>
+        </li>
+        <li (click)="changeTabs('forwarded')"  class="nav-item">
+            <a data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
+                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                <span class="d-none d-md-block">Đã Chuyển</span>
+            </a>
+        </li>
+        <li (click)="changeTabs('watchable')"  class="nav-item">
+            <a data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                <i class="mdi mdi-settings-outline d-md-none d-block"></i>
+                <span class="d-none d-md-block">Được Xem</span>
+            </a>
+        </li>
+    </ul>
+
+    <div *ngIf="currentTab=='assigned'" class="row">
+        <div class="col-sm-12">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr>
+                            </thead>                       
+                       
+                            <tbody>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                </tr>
+                                <tr>
+                                    <td>Garrett Winters</td>
+                                    <td>Accountant</td>
+                                    <td>Tokyo</td>
+                                    <td>63</td>
+                                    <td>2011/07/25</td>
+                                    <td>$170,750</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> <!-- end card-body -->
+                </div>
+
+            </div>
+        </div><!-- end col -->
+    </div><!-- end row -->
+
+    <div *ngIf="currentTab=='forwarded'" class="row">
+        <div class="col-sm-12">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+
+                    </div> <!-- end card-body -->
+                </div>
+
+            </div>
+        </div><!-- end col -->
+    </div><!-- end row -->
+
+    <div *ngIf="currentTab=='watchable'" class="row">
+        <div class="col-sm-12">
+            <div>
+                <div class="card">
+                    <div class="card-body">
+
+                    </div> <!-- end card-body -->
+                </div>
+
+            </div>
+        </div><!-- end col -->
+    </div><!-- end row -->
+
+</div>

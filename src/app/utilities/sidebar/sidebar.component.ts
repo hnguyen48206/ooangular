@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
@@ -8,9 +9,13 @@ import { GeneralService } from 'src/app/services/general.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(public generalService: GeneralService) { }
+  constructor(public generalService: GeneralService, private router:Router) { }
 
   ngOnInit() {
   }
 
+  routeNavigator(route)
+  {
+    this.router.navigate([route]);
+  }
 }

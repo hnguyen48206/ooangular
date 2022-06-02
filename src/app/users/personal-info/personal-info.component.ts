@@ -46,7 +46,7 @@ export class PersonalInfoComponent implements OnInit {
         "active": this.generalService.currentUser.active,
         "nguoiTao": this.generalService.currentUser.nguoiTao,
         "isLeader": this.generalService.currentUser.isLeader
-      }, 'post');
+      }, 'post', true);
       this.toaster.success('', 'Cập nhật thành công!', {
         timeOut: 2000,
       });

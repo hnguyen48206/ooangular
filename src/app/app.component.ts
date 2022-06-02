@@ -9,10 +9,13 @@ import { GeneralService } from './services/general.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   externalJS = [
     "assets/js/vendor.min.js",
-    "assets/js/app.min.js"
+    "assets/js/app.min.js",
+    "assets/js/vendor/jquery.dataTables.min.js",
+    "assets/js/vendor/dataTables.bootstrap5.js",
+    "assets/js/vendor/dataTables.responsive.min.js",
+    "assets/js/vendor/responsive.bootstrap5.min.js"
   ];
 
   constructor(public generalService: GeneralService, private router: Router, private api:ApiservicesService) { }
@@ -78,7 +81,7 @@ export class AppComponent implements OnInit {
       let res = await this.api.httpCall(this.api.apiLists.login, {}, {
         "username": this.generalService.userData.userName,
         "password": this.generalService.userData.password
-      }, 'post');
+      }, 'post', true);
   
       console.log(res)
       let result = <any>res

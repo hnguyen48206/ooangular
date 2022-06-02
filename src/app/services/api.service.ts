@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { GeneralService } from './general.service';
 import { timeout, catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,14 @@ export class ApiservicesService {
     login: '/api/Users/token',
     getUserByID: '/api/Users/GetUserByUserId/',
     getAllUsers: '/api/Users/GetAllUsers',
-    updateUserInfo: '/api/Users/UpdateUser'
+    updateUserInfo: '/api/Users/UpdateUser',
+    getTasks:'/api/Tasks/GetAllTasks/'
   }
 
-  constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
+  constructor(private toaster:ToastrService,private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
   }
   defaultTimeout = 10000
-  httpCall(url, header, body, method) {
+  httpCall(url, header, body, method, showErr) {
     url = this.generalService.appConfig.API_BASE_URL + url;
     if (this.generalService.userData != null) {
       header['Authorization'] = 'Bearer ' + this.generalService.userData.token;
@@ -37,6 +39,8 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            if(showErr)
+            this.showErrorToast(0)
             reject(err);
           });
       }
@@ -52,6 +56,8 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            if(showErr)
+            this.showErrorToast(0)
             reject(err);
           });
       }
@@ -67,6 +73,8 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            if(showErr)
+            this.showErrorToast(0)
             reject(err);
           });
       }
@@ -82,6 +90,8 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            if(showErr)
+            this.showErrorToast(0)
             reject(err);
           });
       }
@@ -97,6 +107,8 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            if(showErr)
+            this.showErrorToast(0)
             reject(err);
           });
       }
@@ -112,7 +124,7 @@ export class ApiservicesService {
 
   async getUserInfo() {
     try {
-      let res = await this.httpCall(this.apiLists.getUserByID + this.generalService.userData.userID, {}, {}, 'get')
+      let res = await this.httpCall(this.apiLists.getUserByID + this.generalService.userData.userID, {}, {}, 'get', false)
       let result = <any>res
       if (result.succeeded) {
         this.generalService.currentUser = result.data;
@@ -129,7 +141,7 @@ export class ApiservicesService {
       }
       let res = await this.httpCall(this.apiLists.getAllUsers, {}, {
         PageNumber: pageNum, PageSize: pageSize
-      }, 'get')
+      }, 'get', false)
       let result = <any>res
       if (result.succeeded) {
         this.generalService.allUsers = result.data;
@@ -137,5 +149,13 @@ export class ApiservicesService {
     } catch (error) {
 
     }
+  }
+
+  showErrorToast(errorCode)
+  {
+    if(errorCode == 0)
+    this.toaster.error('', 'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.', {
+      timeOut: 3000,
+    });
   }
 }

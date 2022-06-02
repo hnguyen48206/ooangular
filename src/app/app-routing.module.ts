@@ -3,7 +3,6 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RouteGuardService } from './services/route-guard.service';
-import { UsersModule } from './users/users.module';
 
 const routes: Routes = [
   {
@@ -24,7 +23,11 @@ const routes: Routes = [
     path:'user',
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   }, 
-  
+  {
+    canActivate:[RouteGuardService],
+    path:'tasks',
+    loadChildren: () => import('./tasks/task.module').then(m => m.TasksModule)
+  }, 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
