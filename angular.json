@@ -87,6 +87,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-archwizard/styles/archwizard.css",
               "src/styles.css"
             ],
             "scripts": []

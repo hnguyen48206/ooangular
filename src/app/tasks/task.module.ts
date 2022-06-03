@@ -7,6 +7,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ArchwizardModule } from 'angular-archwizard';
+import { UtilitiesModule } from '../utilities/utilities.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     TasksRouting,
     FormsModule,
     AngularMyDatePickerModule,
-    AngularEditorModule
-  ]
+    AngularEditorModule,
+    ArchwizardModule,
+    UtilitiesModule
+ ]
 })
 export class TasksModule { }
