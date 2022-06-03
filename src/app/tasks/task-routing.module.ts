@@ -1,20 +1,27 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { NewTaskComponent } from "./new-task/new-task.component";
 import { TaskListComponent } from "./task-list/task-list.component";
+import { TasksComponent } from "./tasks/tasks.component";
 
 
 const routes: Routes = [
   {
     path: '',
-    component: TaskListComponent,
+    component: TasksComponent,
     data: { "link": "/tasks" },
     children: [
-      // {
-      //   data: { "link": "/user/info" },
-      //   path:'info',
-      //   component:PersonalInfoComponent
-      // },
+      {
+        data: { "link": "/tasks/new-task" },
+        path:'new-task',
+        component:NewTaskComponent
+      },
+      {
+        data: { "link": "/tasks/task-list" },
+        path:'task-list',
+        component:TaskListComponent
+      },
       // {
       //   data: { "link": "/user/change-password" },
       //   path:'change-password',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiservicesService } from 'src/app/services/api.service';
 import { GeneralService } from 'src/app/services/general.service';
 
@@ -14,7 +15,12 @@ export class TaskListComponent implements OnInit {
   currentForwardedTask
   currentWatchableTask
 
-  constructor(private api: ApiservicesService, public generalService: GeneralService) { }
+
+  currentPageNumber = 1;
+  currentPageSize = 10;
+  currentTotlaPages = 0;
+
+  constructor(private api: ApiservicesService, public generalService: GeneralService, private router:Router) { }
 
   ngOnInit(): void {
     this.getTaskList();
@@ -22,7 +28,7 @@ export class TaskListComponent implements OnInit {
   changeTabs(tab) {
     this.currentTab = tab;
   }
-  getTaskList() {
+  async getTaskList() {
     let options = {
       PageNumber: 1,
       PageSize: 2,
@@ -30,7 +36,7 @@ export class TaskListComponent implements OnInit {
     }
     switch (this.currentTab) {
       case 'assigned':
-        this.api.httpCall(this.api.apiLists.getTasks + '0', {}, options, 'get', true)
+        let res = await this.api.httpCall(this.api.apiLists.getTasks + '0', {}, options, 'get', true);       
         break;
       case 'forwarded':
         this.api.httpCall(this.api.apiLists.getTasks + '1', {}, options, 'get', true)
@@ -41,5 +47,10 @@ export class TaskListComponent implements OnInit {
       default:
         break;
     }
+  }
+  openNewTaskModal()
+  {
+    console.log('new task')
+    this.router.navigate(['/tasks/new-task']);
   }
 }

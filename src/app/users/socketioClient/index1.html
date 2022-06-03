@@ -11,7 +11,7 @@
 
 <body>
 	<script>
-		var socket = io('10.70.123.6:5000', {
+		var socket = io('127.0.0.1:5000', {
 			"force new connection": true,
 			"reconnectionAttempts": "Infinity",
 			"timeout": 10001,
@@ -19,8 +19,6 @@
 		});
 		socket.on("connect", () => {
 			console.log('Socket Connected with ID: ' + socket.id);
-
-			socket.emit('joinChannel', 'roomtest');
 
 			// setInterval(() => {
 			// 	socket.emit('clientEvent', 'Sent an event from the client ' + socket.id);

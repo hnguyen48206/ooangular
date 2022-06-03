@@ -2,10 +2,15 @@
 
     <!-- start page title -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-10">
             <div class="page-title-box">
                 <h4 class="page-title">Danh Sách Công Việc</h4>
             </div>
+        </div>
+        <div class="col-2 my-auto">
+            <abbr style="cursor: pointer;" title="Thêm Mới Công Việc">
+                <img (click)="openNewTaskModal()" style="width:40px;height:auto; float: right !important;" src="assets/imgs/plus.png"/>
+              </abbr>
         </div>
     </div>
     <!-- end page title -->
