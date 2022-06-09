@@ -18,112 +18,185 @@
         <div class="col-sm-12">
             <aw-wizard>
                 <aw-wizard-step stepTitle="1. Thông Tin Công Việc">
+                    <div style="height:30px"></div>
+
                     <div class="card">
                         <div class="card-body">
-                                <div class="mb-3">
-                                    <label class="form-label" for="validationCustom01">Dự Án: </label>
-                                    <input [(ngModel)]="project" class="form-control" runat="server" name="project" type="text"
-                                        id="title" placeholder="">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="validationCustom02">Khách Hàng: </label>
-                                    <input [(ngModel)]="customer" class="form-control" runat="server" name="customer" type="text"
-                                        id="title" placeholder="">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="validationCustom02">Nhóm Công Việc:</label>
-                                    <input [(ngModel)]="taskGroup" class="form-control" runat="server" name="taskGroup" type="text"
-                                        id="title" placeholder="">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Công Việc Mẫu:</label>
-                                    <input [(ngModel)]="sampleTask" class="form-control" runat="server" name="sampleTask"
-                                        type="email" id="email" placeholder="">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Tên Công Việc:</label>
-                                    <input [(ngModel)]="taskName" class="form-control" runat="server" name="taskName" type="email"
-                                        id="email" placeholder="">
-                                </div>
-        
-                                <div class="mb-3">
-                                    <label class="form-label">Nội Dung:</label>
-                                    <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent">
-                                    </angular-editor>
-                                </div>
-        
-                                <div class="mb-3">
-                                    <label class="form-label">Ngày Bắt Đầu:</label>
-        
-                                    <div class="input-group">
-                                        <!-- input box -->
-                                        <input name="startDate" class="form-control" placeholder="Ngày Bắt Đầu:" angular-mydatepicker
-                                            #startDateID="angular-mydatepicker" [(ngModel)]="startDate"
-                                            [options]="myDatePickerOptions" (dateChanged)="onStartDateChanged($event)" />
-        
-                                        <!-- clear date button -->
-                                        <div name="title" class="input-group-append">
-                                            <button class="btn btn-danger" *ngIf="startDate" (click)="startDateID.clearDate()">
-                                                <i class="uil-multiply"></i>
-                                            </button>
-                                        </div>
-        
-                                        <!-- toggle calendar button -->
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" (click)="startDateID.toggleCalendar()">
-                                                <i class="uil-calender"></i>
-                                            </button>
-                                        </div>
-        
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom01">Dự Án: </label>
+                                <select [(ngModel)]="project" class="form-select" id="project-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                                <!-- <select [(ngModel)]="selectedValue">
+                                        <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
+                                      </select>                                  -->
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom02">Khách Hàng: </label>
+                                <select [(ngModel)]="customer" class="form-select" id="customer-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom02">Nhóm Công Việc:</label>
+
+                                <select [(ngModel)]="taskGroup" class="form-select" id="taskGroup-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Công Việc Mẫu:</label>
+
+                                <select [(ngModel)]="sampleTask" class="form-select" id="sampleTask-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tên Công Việc:</label>
+                                <input [(ngModel)]="taskName" class="form-control" runat="server" name="taskName"
+                                    type="email" id="email" placeholder="">
+                            </div>
+ 
+                            <div class="mb-3">
+                                <label class="form-label">Nội Dung:</label>
+                                <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent">
+                                </angular-editor>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Ngày Bắt Đầu:</label>
+
+                                <div class="input-group">
+                                    <!-- input box -->
+                                    <input name="startDate" class="form-control" placeholder="Ngày Bắt Đầu:"
+                                        angular-mydatepicker #startDateID="angular-mydatepicker" [(ngModel)]="startDate"
+                                        [options]="myDatePickerOptions" (dateChanged)="onStartDateChanged($event)" />
+
+                                    <!-- clear date button -->
+                                    <div name="title" class="input-group-append">
+                                        <button class="btn btn-danger" *ngIf="startDate"
+                                            (click)="startDateID.clearDate()">
+                                            <i class="uil-multiply"></i>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Ngày Kết Thúc:</label>
-        
-                                    <div class="input-group">
-                                        <!-- input box -->
-                                        <input name="endDate" class="form-control" placeholder="Ngày Kết Thúc:" angular-mydatepicker
-                                            #endDateID="angular-mydatepicker" [(ngModel)]="endDate"
-                                            [options]="myDatePickerOptions" (dateChanged)="onEndDateChanged($event)" />
-        
-                                        <!-- clear date button -->
-                                        <div class="input-group-append">
-                                            <button class="btn btn-danger" *ngIf="endDate" (click)="endDateID.clearDate()">
-                                                <i class="uil-multiply"></i>
-                                            </button>
-                                        </div>
-        
-                                        <!-- toggle calendar button -->
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" (click)="endDateID.toggleCalendar()">
-                                                <i class="uil-calender"></i>
-                                            </button>
-                                        </div>
-        
+
+                                    <!-- toggle calendar button -->
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" (click)="startDateID.toggleCalendar()">
+                                            <i class="uil-calender"></i>
+                                        </button>
                                     </div>
+
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Thêm File:</label>
-                                    <input type="file" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày Kết Thúc:</label>
+
+                                <div class="input-group">
+                                    <!-- input box -->
+                                    <input name="endDate" class="form-control" placeholder="Ngày Kết Thúc:"
+                                        angular-mydatepicker #endDateID="angular-mydatepicker" [(ngModel)]="endDate"
+                                        [options]="myDatePickerOptions" (dateChanged)="onEndDateChanged($event)" />
+
+                                    <!-- clear date button -->
+                                    <div class="input-group-append">
+                                        <button class="btn btn-danger" *ngIf="endDate" (click)="endDateID.clearDate()">
+                                            <i class="uil-multiply"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- toggle calendar button -->
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" (click)="endDateID.toggleCalendar()">
+                                            <i class="uil-calender"></i>
+                                        </button>
+                                    </div>
+
                                 </div>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input  [(ngModel)]="unknownTimeCheck" type="checkbox" class="form-check-input" id="unknownTimeCheck">
+                                <label class="form-check-label" for="unknownTimeCheck">Thời gian không xác định</label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Thêm File:</label>
+                                <input type="file" class="form-control">
+                            </div>
                         </div>
                     </div>
-                  <button class="btn btn-primary" awNextStep>Tiếp Tục</button>
+                    <button class="btn btn-primary" awNextStep>Tiếp Tục</button>
                 </aw-wizard-step>
                 <aw-wizard-step stepTitle="2. Chọn Người Xử Lý">
-                    <app-dual-list (updateLists)="leftList=$event.leftList; rightList=$event.rightList" [leftList]="leftList" [rightList]="rightList"></app-dual-list>
-                  <button class="btn btn-primary" awPreviousStep>Go to previous step</button>
-                  <button class="btn btn-primary" awNextStep>Go to next step</button>
+                    <div style="height:30px"></div>
+                    <div class="card">
+                        <div class="card-body">
+                            <app-dual-list (updateLists)="PersonelList=$event.leftList; ChosenAssigneelList=$event.rightList"
+                                [leftList]="PersonelList" [rightList]="ChosenAssigneelList"></app-dual-list>
+                            <div style="height:30px"></div>
+
+                            <div style="margin: 0 10px 30px 30px;">
+                                <label class="form-label" for="majorAssignee"><span style="color: tomato;">(*)</span> Người Xử lý Chính: </label>
+                                <select style="width: 50%;" [(ngModel)]="majorAssignee" class="form-select" id="majorAssignee">
+                                    <option *ngFor="let assignee of ChosenAssigneelList">{{assignee.name}}</option>
+                                </select>
+                            </div>
+
+                            <button style="margin: 0 10px 0 30px;" class="btn btn-warning" awPreviousStep>Quay
+                                Lại</button>
+                            <button class="btn btn-primary" awNextStep>Tiếp Tục</button>
+                        </div>
+                    </div>
+
+
                 </aw-wizard-step>
                 <aw-wizard-step stepTitle="3. Chọn Người Xem">
-                  Content of Step 3
-                  <button class="btn btn-primary" awPreviousStep>Previous Step</button>
-                  <button class="btn btn-primary">Finish</button>
+                    <div style="height:30px"></div>
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- <app-dual-list (updateLists)="leftList=$event.leftList; rightList=$event.rightList"
+                                [leftList]="leftList" [rightList]="rightList"></app-dual-list>
+                            <div style="height:30px"></div> -->
+
+                            <div style="margin: 0 20px 20px 30px;">
+                                <div class="form-check form-check-inline form-checkbox-danger">
+                                    <input type="checkbox" class="form-check-input" id="urgentCheck">
+                                    <label class="form-check-label" for="urgentCheck" style="color:tomato">Khẩn</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="checkbox" class="form-check-input" id="watchCheck">
+                                    <label class="form-check-label" for="watchCheck">Theo Dõi</label>
+                                </div>
+                            </div>
+
+                            <button style="margin: 0 10px 0 30px;" class="btn btn-warning" awPreviousStep>Quay
+                                Lại</button>
+                            <button class="btn btn-primary"><i class="uil-book-medical"></i> Tạo Công Việc</button>
+                        </div>
+                    </div>
+
+
                 </aw-wizard-step>
-              </aw-wizard>
+            </aw-wizard>
         </div><!-- end col -->
     </div><!-- end row -->
-    <!-- end row -->   
+    <!-- end row -->
     <div style="height:20px"></div>
-   
+
 </div>

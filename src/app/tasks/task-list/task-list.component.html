@@ -1,5 +1,5 @@
 <div class="container-fluid">
-
+    <ngx-loading [show]="spinnerLoading" [config]="{ primaryColour: 'whitesmoke', backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
     <!-- start page title -->
     <div class="row">
         <div class="col-10">
@@ -9,8 +9,9 @@
         </div>
         <div class="col-2 my-auto">
             <abbr style="cursor: pointer;" title="Thêm Mới Công Việc">
-                <img (click)="openNewTaskModal()" style="width:40px;height:auto; float: right !important;" src="assets/imgs/plus.png"/>
-              </abbr>
+                <img (click)="openNewTaskModal()" style="width:40px;height:auto; float: right !important;"
+                    src="assets/imgs/plus.png" />
+            </abbr>
         </div>
     </div>
     <!-- end page title -->
@@ -24,19 +25,32 @@
                 <span class="d-none d-md-block">Được Giao</span>
             </a>
         </li>
-        <li (click)="changeTabs('forwarded')"  class="nav-item">
+        <li (click)="changeTabs('forwarded')" class="nav-item">
             <a data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                 <span class="d-none d-md-block">Đã Chuyển</span>
             </a>
         </li>
-        <li (click)="changeTabs('watchable')"  class="nav-item">
+        <li (click)="changeTabs('watchable')" class="nav-item">
             <a data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
                 <i class="mdi mdi-settings-outline d-md-none d-block"></i>
                 <span class="d-none d-md-block">Được Xem</span>
             </a>
         </li>
     </ul>
+
+    <div class="list row">
+        <div class="col-md-8">
+            <div class="input-group mb-3">
+                <input (keyup)="filterList()" type="text" class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="searchKey" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="filterList()">
+                        <i class="uil-search-alt"></i> Tìm Kiếm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div *ngIf="currentTab=='assigned'" class="row">
         <div class="col-sm-12">
@@ -53,8 +67,8 @@
                                     <th>Start date</th>
                                     <th>Salary</th>
                                 </tr>
-                            </thead>                       
-                       
+                            </thead>
+
                             <tbody>
                                 <tr>
                                     <td>Tiger Nixon</td>
@@ -74,6 +88,7 @@
                                 </tr>
                             </tbody>
                         </table>
+
                     </div> <!-- end card-body -->
                 </div>
 
@@ -106,5 +121,23 @@
             </div>
         </div><!-- end col -->
     </div><!-- end row -->
+
+
+    <!-- /////////////////// Pagination -->
+
+    <div class="list row">
+        <div class="col-md-12">
+            <pagination-controls previousLabel="Trang trước" nextLabel="Trang sau" responsive="true"
+                (pageChange)="handlePageChange($event)"></pagination-controls>
+        </div>
+        <div class="mt-3">
+            Số lượng công việc mỗi trang:
+            <select style="border: solid 1px rgb(230, 229, 229);" (change)="handlePageSizeChange($event)">
+                <option *ngFor="let size of pageSizes" [ngValue]="size">
+                    {{ size }}
+                </option>
+            </select>
+        </div>
+    </div>
 
 </div>

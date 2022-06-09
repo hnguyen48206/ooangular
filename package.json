@@ -22,6 +22,8 @@
     "@kolkov/angular-editor": "^1.2.0",
     "angular-archwizard": "^7.0.0",
     "angular-mydatepicker": "^0.11.5",
+    "ngx-loading": "^2.0.1",
+    "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

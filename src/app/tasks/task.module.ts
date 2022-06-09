@@ -9,6 +9,8 @@ import { TasksComponent } from './tasks/tasks.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ArchwizardModule } from 'angular-archwizard';
 import { UtilitiesModule } from '../utilities/utilities.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxLoadingModule } from "ngx-loading";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { UtilitiesModule } from '../utilities/utilities.module';
     AngularMyDatePickerModule,
     AngularEditorModule,
     ArchwizardModule,
-    UtilitiesModule
- ]
+    UtilitiesModule,
+    NgxPaginationModule,
+    NgxLoadingModule.forRoot({})
+  ]
 })
 export class TasksModule { }
