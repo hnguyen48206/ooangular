@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralService } from 'src/app/services/general.service';
+import data from './change-password.language';
 
 @Component({
   selector: 'app-change-password',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
-
-  constructor() { }
+  getLabel(key)
+  {
+    return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
+  }
+  constructor(public generalService:GeneralService) { }
 
   ngOnInit(): void {
   }

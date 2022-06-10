@@ -3,6 +3,7 @@ import { IMyDateModel, IAngularMyDpOptions } from 'angular-mydatepicker';
 import { ToastrService } from 'ngx-toastr';
 import { ApiservicesService } from 'src/app/services/api.service';
 import { GeneralService } from 'src/app/services/general.service';
+import data from './personal-info.language';
 
 @Component({
   selector: 'app-personal-info',
@@ -23,6 +24,11 @@ export class PersonalInfoComponent implements OnInit {
 
   constructor(public generalService: GeneralService, public api: ApiservicesService, public toaster: ToastrService) { }
 
+  getLabel(key)
+  {
+    return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
+  }
+  
   ngOnInit(): void {
     if (this.generalService.currentUser != null) {
       this.email = this.generalService.currentUser.email;

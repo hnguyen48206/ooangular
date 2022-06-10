@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiservicesService } from 'src/app/services/api.service';
 import { GeneralService } from 'src/app/services/general.service';
+import data from './task-list.language';
 
 @Component({
   selector: 'app-task-list',
@@ -34,7 +35,10 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.getTaskList();
   }
-
+  getLabel(key)
+  {
+    return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
+  }
   changeTabs(tab) {
     this.searchKey = ''
     this.currentTab = tab;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/services/general.service';
+import data from './header.language';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { GeneralService } from 'src/app/services/general.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  dictionary
   listOfFlags = [
     {
       "Code":'EN',
@@ -21,17 +22,18 @@ export class HeaderComponent implements OnInit {
       "URL": 'assets/images/flags/vietnam.png'
     }
   ]
-  currentLanguage = {
-    "Code":"VN",
-    "Name": "Tiếng Việt",
-    "URL": 'assets/images/flags/vietnam.png'
-  }
+  
 
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(public generalService: GeneralService, private router:Router) { }
+  constructor(public generalService: GeneralService, private router:Router) {}
 
-  ngOnInit() { }
+  getLabel(key)
+  {
+    return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
+  }
+
+  ngOnInit() {}
 
   toggleSideBar() {
     this.toggleSideBarForMe.emit();
@@ -47,7 +49,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changeLanguage(flag) {
-    this.currentLanguage = flag;
+    this.generalService.currentLanguage = flag;
   }
   personalInfo()
   {
@@ -60,5 +62,6 @@ export class HeaderComponent implements OnInit {
   helpPage()
   {
     this.router.navigate(['/user/help'])
-  }
+  } 
+
 }

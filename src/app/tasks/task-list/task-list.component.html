@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-10">
             <div class="page-title-box">
-                <h4 class="page-title">Danh Sách Công Việc</h4>
+                <h4 class="page-title">{{getLabel("pageTitle")}}</h4>
             </div>
         </div>
         <div class="col-2 my-auto">
-            <abbr style="cursor: pointer;" title="Thêm Mới Công Việc">
+            <abbr style="cursor: pointer;" [title]="getLabel('newTask')">
                 <img (click)="openNewTaskModal()" style="width:40px;height:auto; float: right !important;"
                     src="assets/imgs/plus.png" />
             </abbr>
@@ -22,30 +22,30 @@
         <li (click)="changeTabs('assigned')" class="nav-item">
             <a data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                <span class="d-none d-md-block">Được Giao</span>
+                <span class="d-none d-md-block">{{getLabel("assignedTab")}}</span>
             </a>
         </li>
         <li (click)="changeTabs('forwarded')" class="nav-item">
             <a data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                <span class="d-none d-md-block">Đã Chuyển</span>
+                <span class="d-none d-md-block">{{getLabel("forwadedTab")}}</span>
             </a>
         </li>
         <li (click)="changeTabs('watchable')" class="nav-item">
             <a data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
                 <i class="mdi mdi-settings-outline d-md-none d-block"></i>
-                <span class="d-none d-md-block">Được Xem</span>
+                <span class="d-none d-md-block">{{getLabel("watchableTab")}}</span>
             </a>
         </li>
     </ul>
-
+    
     <div class="list row">
         <div class="col-md-8">
             <div class="input-group mb-3">
-                <input (keyup)="filterList()" type="text" class="form-control" placeholder="Tìm kiếm..." [(ngModel)]="searchKey" />
+                <input (keyup)="filterList()" type="text" class="form-control" [placeholder]="getLabel('searchPlaceholer')" [(ngModel)]="searchKey" />
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" (click)="filterList()">
-                        <i class="uil-search-alt"></i> Tìm Kiếm
+                        <i class="uil-search-alt"></i> {{getLabel("searchBtn")}}
                     </button>
                 </div>
             </div>
@@ -127,11 +127,11 @@
 
     <div class="list row">
         <div class="col-md-12">
-            <pagination-controls previousLabel="Trang trước" nextLabel="Trang sau" responsive="true"
+            <pagination-controls bind-attr.previousLabel ="getLabel('previousBtn')" bind-attr.nextLabel ="getLabel('nextBtn')" responsive="true"
                 (pageChange)="handlePageChange($event)"></pagination-controls>
         </div>
         <div class="mt-3">
-            Số lượng công việc mỗi trang:
+            {{getLabel("itemsPerPage")}}:
             <select style="border: solid 1px rgb(230, 229, 229);" (change)="handlePageSizeChange($event)">
                 <option *ngFor="let size of pageSizes" [ngValue]="size">
                     {{ size }}

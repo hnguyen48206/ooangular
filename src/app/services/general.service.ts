@@ -11,6 +11,11 @@ export class GeneralService {
   userData
   currentUser
   allUsers
+  currentLanguage = {
+    "Code":"VN",
+    "Name": "Tiếng Việt",
+    "URL": 'assets/images/flags/vietnam.png'
+  }
   constructor(private router: Router) { }
   setDefaultAvatar(e)
   {

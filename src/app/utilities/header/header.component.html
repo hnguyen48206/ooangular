@@ -27,7 +27,7 @@
         
                 <li class="dropdown notification-list topbar-dropdown d-none d-lg-block">
                     <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" id="topbar-languagedrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <img [src]="currentLanguage.URL" alt="user-image" class="me-1" height="12"> <span class="align-middle">{{currentLanguage.Name}}</span> <i class="mdi mdi-chevron-down"></i>
+                        <img [src]="generalService.currentLanguage.URL" alt="user-image" class="me-1" height="12"> <span class="align-middle">{{generalService.currentLanguage.Name}}</span> <i class="mdi mdi-chevron-down"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu" aria-labelledby="topbar-languagedrop">
                         <!-- item-->
@@ -206,19 +206,19 @@
                         <!-- item-->
                         <a (click)="personalInfo()" class="dropdown-item notify-item">
                             <i class="uil-user-circle me-1"></i>
-                            <span>Cá Nhân</span>
+                            <span>{{getLabel("personal")}}</span>
                         </a>
                         <a (click)="changePassword()" class="dropdown-item notify-item">
                             <i class="uil-key-skeleton me-1"></i>
-                            <span>Đổi Mật Khẩu</span>
+                            <span>{{getLabel("changePass")}}</span>
                         </a>
                         <a (click)="helpPage()" class="dropdown-item notify-item">
                             <i class="uil-comment-question me-1"></i>
-                            <span>Trợ Giúp</span>
+                            <span>{{getLabel("help")}}</span>
                         </a>
                         <a (click)="logout()" class="dropdown-item notify-item">
                             <i class="mdi mdi-logout me-1"></i>
-                            <span>Đăng Xuất</span>
+                            <span>{{getLabel("logout")}}</span>
                         </a>
 
                     </div>

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Thông Tin Cá Nhân</h4>
+                <h4 class="page-title">{{getLabel("pageTitle")}}</h4>
             </div>
         </div>
     </div>
@@ -18,25 +18,25 @@
                     <div class="card-body">
                         <form class="needs-validation" novalidate>
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Họ và Tên: </label>
+                                <label class="form-label" for="validationCustom01">{{getLabel("fullName")}}: </label>
                                 <span style="margin-left: 10px;">{{generalService.currentUser.fullName}}</span>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom02">Phòng Ban: </label>
+                                <label class="form-label" for="validationCustom02">{{getLabel("department")}}: </label>
                                 <span style="margin-left: 10px;">{{generalService.currentUser.groupChinhName}}</span>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom02">Chức Danh:
+                                <label class="form-label" for="validationCustom02">{{getLabel("title")}}:
                                     {{generalService.currentUser.title}}</label>
                                 <input [(ngModel)]="title" class="form-control" runat="server" name="title" type="text"
                                     id="title" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Ngày Sinh:</label>
+                                <label class="form-label">{{getLabel("birthday")}}:</label>
 
                                 <div class="input-group">
                                     <!-- input box -->
-                                    <input class="form-control" name="mydate" placeholder="Chọn ngày"
+                                    <input class="form-control" name="mydate" [placeholder]="getLabel('datePick')"
                                         angular-mydatepicker #dp="angular-mydatepicker" [(ngModel)]="birthDate"
                                         [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" />
 
@@ -58,21 +58,20 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Email</label>
+                                <label class="form-label">{{getLabel("email")}}</label>
                                 <input [(ngModel)]="email" class="form-control" runat="server" name="email" type="email"
                                     id="email" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Số Điện Thoại</label>
+                                <label class="form-label">{{getLabel("phonenumber")}}</label>
                                 <input [(ngModel)]="phonenumber" class="form-control" runat="server" name="phonenumber"
                                     type="tel" id="phonenumber" placeholder="">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Ảnh Đại Diện</label>
+                                <label class="form-label">{{getLabel("avatar")}}</label>
                                 <input type="file" accept='image/*' class="form-control">
                             </div>
-                            <button (click)="updateUserInfo()" class="btn btn-primary" type="submit">Lưu Thông
-                                Tin</button>
+                            <button (click)="updateUserInfo()" class="btn btn-primary" type="submit">{{getLabel("saveBtn")}}</button>
                         </form>
 
                     </div> <!-- end card-body -->

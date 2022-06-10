@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/services/general.service';
+import data from './sidebar.language';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,5 +18,10 @@ export class SidebarComponent implements OnInit {
   routeNavigator(route)
   {
     this.router.navigate([route]);
+  }
+
+  getLabel(key)
+  {
+    return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
   }
 }
