@@ -22,6 +22,8 @@
     "@kolkov/angular-editor": "^1.2.0",
     "angular-archwizard": "^7.0.0",
     "angular-mydatepicker": "^0.11.5",
+    "moment": "^2.29.3",
+    "ng-circle-progress": "^1.6.0",
     "ngx-loading": "^2.0.1",
     "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^13.2.1",

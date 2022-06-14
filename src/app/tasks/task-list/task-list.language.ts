@@ -9,7 +9,13 @@ let data = {
         "previousBtn": 'Previous',
         "assignedTab": "Assigned Tasks",
         "forwadedTab": "Forwarded Tasks",
-        "watchableTab": "Watchable Tasks"
+        "watchableTab": "Watchable Tasks",
+        "taskNameCol":"Task Name",
+        "creatorCol":"Creator",
+        "startDateCol":"Start Date",
+        "endDateCol":"End Date",
+        "progressCol":"Progress",
+        "majorAssignerCol":"Major Assigner"
     },
     "VN": {
         "pageTitle": "Danh Sách Công Việc",
@@ -21,7 +27,13 @@ let data = {
         "previousBtn": 'Trang trước',
         "assignedTab": "Được Giao",
         "forwadedTab": "Đã Chuyển",
-        "watchableTab": "Được Xem"
+        "watchableTab": "Được Xem",
+        "taskNameCol":"Tên Công Việc",
+        "creatorCol":"Người Tạo",
+        "startDateCol":"Ngày Bắt Đầu",
+        "endDateCol":"Ngày Kết Thúc",
+        "progressCol":"Tiến Độ",
+        "majorAssignerCol":"Người Xử Lý Chính"
     }
 };
 

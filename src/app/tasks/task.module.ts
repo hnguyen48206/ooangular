@@ -11,6 +11,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UtilitiesModule } from '../utilities/utilities.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxLoadingModule } from "ngx-loading";
+import { CircleProgressOptions, NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,11 @@ import { NgxLoadingModule } from "ngx-loading";
     ArchwizardModule,
     UtilitiesModule,
     NgxPaginationModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    NgCircleProgressModule
+  ],
+  providers:[
+    CircleProgressOptions
   ]
 })
 export class TasksModule { }
