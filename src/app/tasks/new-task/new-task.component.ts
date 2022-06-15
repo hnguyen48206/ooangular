@@ -96,7 +96,8 @@ export class NewTaskComponent implements OnInit {
     // console.log(event.singleDate.formatted) 
   }
   ngOnInit(): void {
-    this.allUserList = this.generalService.allUsers
+    this.allUserInStep2List = this.generalService.cloneAnything(this.generalService.allUsers);
+    this.allUserInStep3List = this.generalService.cloneAnything(this.generalService.allUsers);
   }
   ngOnDestroy(): void {
   }
@@ -127,15 +128,14 @@ export class NewTaskComponent implements OnInit {
 
   ////////////////////////Step 2
 
-  allUserList
+  allUserInStep2List
   chosenAssigneelList: any[] = [
   ];
 
   majorAssignee
   dualListUpdateForAssignee(event)
   {
-    console.log(event)
-    this.allUserList=event.leftList; this.chosenAssigneelList=event.rightList
+    this.allUserInStep2List=event.leftList; this.chosenAssigneelList=event.rightList
 
     //kiem tra xem majorAssignee đã chọn trước đó còn trong list chosen hay ko.
     if(this.majorAssignee!=null)
@@ -163,6 +163,18 @@ export class NewTaskComponent implements OnInit {
       return true
   }
   //////////////////////////Step 3
+
+  allUserInStep3List
+  chosenAudienceList: any[] = [
+  ];
+
+  dualListUpdateForAudience(event)
+  {
+    this.allUserInStep3List=event.leftList; this.chosenAudienceList=event.rightList
+  }
+  step3Validator() {
+  }
+
   createNewTask() {
     let body = {
       "chude": "string",
