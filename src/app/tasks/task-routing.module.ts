@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NewTaskComponent } from "./new-task/new-task.component";
+import { TaskDetailComponent } from "./task-detail/task-detail.component";
 import { TaskListComponent } from "./task-list/task-list.component";
 import { TasksComponent } from "./tasks/tasks.component";
 
@@ -21,6 +22,11 @@ const routes: Routes = [
         data: { "link": "/tasks/task-list" },
         path:'task-list',
         component:TaskListComponent
+      },
+      {
+        data: { "link": "/tasks/task-detail" },
+        path:'task-detail/:taskid',
+        component:TaskDetailComponent
       },
       // {
       //   data: { "link": "/user/change-password" },

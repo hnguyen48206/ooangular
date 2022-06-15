@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { GeneralService } from './general.service';
 import { timeout, catchError } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,13 @@ export class ApiservicesService {
     getUserByID: '/api/Users/GetUserByUserId/',
     getAllUsers: '/api/Users/GetAllUsers',
     updateUserInfo: '/api/Users/UpdateUser',
-    getTasks:'/api/Tasks/GetAllTasks/'
+    getTasks:'/api/Tasks/GetAllTasks/',
+    getTaskDetail: '/api/Tasks/GetTaskDetail/',
+    createNewTask: '/api/Tasks/CreateNewTask',
+    getAllUserGroups: '/api/Groups/GetAllGroups'
   }
 
-  constructor(private toaster:ToastrService,private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
+  constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
   }
   defaultTimeout = 10000
   httpCall(url, header, body, method, showErr) {
@@ -40,7 +42,7 @@ export class ApiservicesService {
             resolve(res);
           }, (err) => {
             if(showErr)
-            this.showErrorToast(0)
+            this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
           });
       }
@@ -57,7 +59,7 @@ export class ApiservicesService {
             resolve(res);
           }, (err) => {
             if(showErr)
-            this.showErrorToast(0)
+            this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
           });
       }
@@ -74,7 +76,7 @@ export class ApiservicesService {
             resolve(res);
           }, (err) => {
             if(showErr)
-            this.showErrorToast(0)
+            this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
           });
       }
@@ -91,7 +93,7 @@ export class ApiservicesService {
             resolve(res);
           }, (err) => {
             if(showErr)
-            this.showErrorToast(0)
+            this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
           });
       }
@@ -108,7 +110,7 @@ export class ApiservicesService {
             resolve(res);
           }, (err) => {
             if(showErr)
-            this.showErrorToast(0)
+            this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
           });
       }
@@ -137,7 +139,7 @@ export class ApiservicesService {
   async getAllUsers(pageNum, pageSize) {
     try {
       if (pageNum == null || pageSize == null) {
-        pageNum = 1; pageSize = 1000;
+        pageNum = 1; pageSize = 200;
       }
       let res = await this.httpCall(this.apiLists.getAllUsers, {}, {
         PageNumber: pageNum, PageSize: pageSize
@@ -151,11 +153,5 @@ export class ApiservicesService {
     }
   }
 
-  showErrorToast(errorCode)
-  {
-    if(errorCode == 0)
-    this.toaster.error('', 'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.', {
-      timeOut: 3000,
-    });
-  }
+ 
 }

@@ -30,15 +30,14 @@ export class TaskListComponent implements OnInit {
   pageSizes = [10, 20, 30];
 
   paginationConfig
-  
 
-  constructor(private el:ElementRef,private api: ApiservicesService, public generalService: GeneralService, private router: Router) { 
+
+  constructor(private el: ElementRef, private api: ApiservicesService, public generalService: GeneralService, private router: Router) {
   }
   ngOnInit(): void {
     this.getTaskList();
-      }
-  getLabel(key)
-  {
+  }
+  getLabel(key) {
     return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
   }
   changeTabs(tab) {
@@ -66,7 +65,7 @@ export class TaskListComponent implements OnInit {
           taskType = '0'
           res = await this.api.httpCall(this.api.apiLists.getTasks + taskType, {}, options, 'get', true);
           result = <any>res
-          this.originalAssignedTask = result.data;
+          this.originalAssignedTask = this.updateProgressInfoToList(result.data);
           this.currentAssignedTask = Array.from(this.originalAssignedTask)
           this.count = result.totalRecords
           this.paginationConfig = {
@@ -80,7 +79,7 @@ export class TaskListComponent implements OnInit {
           taskType = '1'
           res = await this.api.httpCall(this.api.apiLists.getTasks + taskType, {}, options, 'get', true);
           result = <any>res
-          this.originalForwardedTask = result.data;
+          this.originalForwardedTask = this.updateProgressInfoToList(result.data);
           this.currentForwardedTask = Array.from(this.originalForwardedTask)
           this.count = result.totalRecords
           this.paginationConfig = {
@@ -94,7 +93,7 @@ export class TaskListComponent implements OnInit {
           taskType = '2'
           res = await this.api.httpCall(this.api.apiLists.getTasks + taskType, {}, options, 'get', true);
           result = <any>res
-          this.originalWatchableTask = result.data;
+          this.originalWatchableTask = this.updateProgressInfoToList(result.data);
           this.currentWatchableTask = Array.from(this.originalWatchableTask)
           this.count = result.totalRecords
           this.paginationConfig = {
@@ -134,8 +133,8 @@ export class TaskListComponent implements OnInit {
           let self = this;
           if (this.searchKey != '')
             this.currentAssignedTask = this.originalAssignedTask.filter(function (v, i) {
-              if (self.removeAccents(v.chude.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0 
-              || self.removeAccents(v.nguoiTaoHoTen.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0) {
+              if (self.removeAccents(v.chude.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0
+                || self.removeAccents(v.nguoiTaoHoTen.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0) {
                 return true;
               } else false;
             });
@@ -148,8 +147,8 @@ export class TaskListComponent implements OnInit {
           let self = this;
           if (this.searchKey != '')
             this.currentForwardedTask = this.originalForwardedTask.filter(function (v, i) {
-              if (self.removeAccents(v.chude.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0 
-              || self.removeAccents(v.nguoiTaoHoTen.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0) {
+              if (self.removeAccents(v.chude.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0
+                || self.removeAccents(v.nguoiTaoHoTen.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0) {
                 return true;
               } else false;
             });
@@ -162,8 +161,8 @@ export class TaskListComponent implements OnInit {
           let self = this;
           if (this.searchKey != '')
             this.currentWatchableTask = this.originalWatchableTask.filter(function (v, i) {
-              if (self.removeAccents(v.chude.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0 
-              || self.removeAccents(v.nguoiTaoHoTen.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0) {
+              if (self.removeAccents(v.chude.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0
+                || self.removeAccents(v.nguoiTaoHoTen.toLowerCase()).indexOf(self.removeAccents(self.searchKey)) >= 0) {
                 return true;
               } else false;
             });
@@ -175,9 +174,10 @@ export class TaskListComponent implements OnInit {
         break;
     }
   }
-  taskItemClick(task)
-  {
-    console.log(task)
+  taskItemClick(task) {
+    console.log(task);
+    let taskid = task.mscv;
+    this.router.navigateByUrl(`/tasks/task-detail/${taskid}`);
   }
   removeAccents(str) {
     var AccentsMap = [
@@ -193,29 +193,68 @@ export class TaskListComponent implements OnInit {
       "uùủũúụưừửữứự",
       "UÙỦŨÚỤƯỪỬỮỨỰ",
       "yỳỷỹýỵ",
-      "YỲỶỸÝỴ"    
+      "YỲỶỸÝỴ"
     ];
-    for (var i=0; i<AccentsMap.length; i++) {
+    for (var i = 0; i < AccentsMap.length; i++) {
       var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
       var char = AccentsMap[i][0];
       str = str.replace(re, char);
     }
     return str;
   }
-  getProgressInfo(start: string, stop: string)
-  {
-    let startDate = moment(start.split(' ')[0],'DD-MM-YYYY')
-    let endDate = moment(stop.split(' ')[0],'DD-MM-YYYY')
-    let today = moment().format('DD-MM-YYYY');
+  updateProgressInfoToList(list: [any]) {
+    for (let i = 0; i < list.length; ++i) {
+      list[i]['progressInfo'] = this.getProgressInfo(list[i].ngayBatDau, list[i].ngayKetThucDuKien, list[i].ngayKetThucThucTe);
+    }
+    return list;
+  }
+  getProgressInfo(start: string, stop: string, realEnd: string) {
+    let realEndDate
+    let displayText=''
+    let isLate = false;
+    let percent = 100;
+    let outerStrokeColor = '#78C000'
+    let startDate = moment(start.split(' ')[0], 'DD-MM-YYYY')
+    let endDate = moment(stop.split(' ')[0], 'DD-MM-YYYY')
+    let today = moment().format('D MMM, YYYY');
+    let hasTaskPastDue = endDate.diff(today, 'days', false);
 
-    let hasTaskPastDue = endDate.diff(today,'days',false)
-    console.log(hasTaskPastDue)
-    if(hasTaskPastDue<0)
-    console.log('Trễ task')
-    // console.log(compare)
+    if (realEnd != null) {
+      realEndDate = moment(realEnd.split(' ')[0], 'DD-MM-YYYY');
+      hasTaskPastDue = endDate.diff(realEndDate, 'days', false);
+      if (hasTaskPastDue < 0) {
+        // task kết thúc trễ
+        isLate = true; percent = 100; outerStrokeColor = '#F7CA18';
+        displayText = 'Kết thúc trễ ' + Math.abs(hasTaskPastDue) + ' ngày!'
+      }
+      else if (hasTaskPastDue >= 0) {
+        // task kết thúc đúng hạn
+        percent = 100; outerStrokeColor = '#FFBF47'
+      }
+    }
+    else {
+      if (hasTaskPastDue < 0) {
+        // task quá hạn
+        isLate = true; percent = 99; outerStrokeColor = '#FF6347';
+        displayText = 'Đã quá hạn ' + Math.abs(hasTaskPastDue) + ' ngày!'
+      }
+      else if (hasTaskPastDue == 0) {
+        // task đến hạn chưa kết thúc
+        percent = 100; outerStrokeColor = '#F7CA18'
+      }
+      else {
+        // task chưa đến hạn, chưa kết thúc
+        let duration = endDate.diff(startDate, 'days', false);
+        percent = Math.round(hasTaskPastDue * 100 / duration);
+      }
+    }
+
     return {
-      percent: -85,
-      outerStrokeColor: '#78C000'
+      isLate: isLate,
+      lateBy: Math.abs(hasTaskPastDue),
+      percent: percent,
+      outerStrokeColor: outerStrokeColor,
+      displayText: displayText
     }
   }
 }

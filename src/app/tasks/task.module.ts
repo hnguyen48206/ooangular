@@ -12,12 +12,14 @@ import { UtilitiesModule } from '../utilities/utilities.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxLoadingModule } from "ngx-loading";
 import { CircleProgressOptions, NgCircleProgressModule } from 'ng-circle-progress';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 
 @NgModule({
   declarations: [
     TaskListComponent,
     NewTaskComponent,
-    TasksComponent
+    TasksComponent,
+    TaskDetailComponent
   ],
   imports: [
     CommonModule,

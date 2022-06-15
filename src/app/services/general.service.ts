@@ -1,5 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class GeneralService {
     "Name": "Tiếng Việt",
     "URL": 'assets/images/flags/vietnam.png'
   }
-  constructor(private router: Router) { }
+  constructor(private router: Router, private toaster:ToastrService) { }
   setDefaultAvatar(e)
   {
     e.target.src = 'assets/imgs/defaultAvatar.png'
@@ -46,5 +48,24 @@ export class GeneralService {
     this.currentUser = null;
     this.allUsers = null
   }
-
+  showErrorToast(errorCode, message)
+  {
+    // 0 là error, 1 là success, 2 là warning
+    if(errorCode == 0)
+    this.toaster.error('', message, {
+      timeOut: 3000,
+    });
+    else if(errorCode == 1)
+    this.toaster.success('', message, {
+      timeOut: 3000,
+    });
+    else if(errorCode == 2)
+    this.toaster.warning('', message, {
+      timeOut: 3000,
+    });
+  }
+  emailValidator(email)
+  {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
 }

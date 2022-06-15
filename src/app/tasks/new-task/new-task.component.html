@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <aw-wizard>
+            <aw-wizard navBarLayout="small">
                 <aw-wizard-step stepTitle="1. Thông Tin Công Việc">
                     <div style="height:30px"></div>
 
@@ -31,9 +31,6 @@
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                                <!-- <select [(ngModel)]="selectedValue">
-                                        <option *ngFor="let c of countries" [ngValue]="c">{{c.name}}</option>
-                                      </select>                                  -->
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="validationCustom02">Khách Hàng: </label>
@@ -68,19 +65,26 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Tên Công Việc:</label>
+                                <label class="form-label">Tên Công Việc: <span class="requiredField">(*)</span></label>
+                                <!-- <input [class.is-invalid] = "taskName === '' && step1BtnClicked"
+                                       [class.is-valid] = "taskName != '' && step1BtnClicked"
+                                       [(ngModel)]="taskName" class="form-control" runat="server" name="taskName"
+                                    type="text" id="taskName" placeholder="">
+                                <div class="invalid-feedback">
+                                    Tên công việc không bỏ trống
+                                </div> -->
                                 <input [(ngModel)]="taskName" class="form-control" runat="server" name="taskName"
-                                    type="email" id="email" placeholder="">
+                                    type="text" id="taskName" placeholder="">
                             </div>
- 
+
                             <div class="mb-3">
-                                <label class="form-label">Nội Dung:</label>
+                                <label class="form-label">Nội Dung: <span class="requiredField">(*)</span></label>
                                 <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent">
                                 </angular-editor>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Ngày Bắt Đầu:</label>
+                                <label class="form-label">Ngày Bắt Đầu: <span class="requiredField">(*)</span></label>
 
                                 <div class="input-group">
                                     <!-- input box -->
@@ -106,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Ngày Kết Thúc:</label>
+                                <label class="form-label">Ngày Kết Thúc: <span class="requiredField">(*)</span></label>
 
                                 <div class="input-group">
                                     <!-- input box -->
@@ -131,7 +135,8 @@
                                 </div>
                             </div>
                             <div class="form-check mb-3">
-                                <input  [(ngModel)]="unknownTimeCheck" type="checkbox" class="form-check-input" id="unknownTimeCheck">
+                                <input [(ngModel)]="unknownTimeCheck" type="checkbox" class="form-check-input"
+                                    id="unknownTimeCheck">
                                 <label class="form-check-label" for="unknownTimeCheck">Thời gian không xác định</label>
                             </div>
 
@@ -141,26 +146,29 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" awNextStep>Tiếp Tục</button>
+                    <button (click)="wizardNavbtnClicked(1,'next')" class="btn btn-primary">Tiếp Tục</button>
                 </aw-wizard-step>
-                <aw-wizard-step stepTitle="2. Chọn Người Xử Lý">
+                <aw-wizard-step  stepTitle="2. Chọn Người Xử Lý">
                     <div style="height:30px"></div>
                     <div class="card">
                         <div class="card-body">
-                            <app-dual-list (updateLists)="PersonelList=$event.leftList; ChosenAssigneelList=$event.rightList"
-                                [leftList]="PersonelList" [rightList]="ChosenAssigneelList"></app-dual-list>
+                            <app-dual-list
+                                (updateLists)="dualListUpdateForAssignee($event)"
+                                [leftList]="allUserList" [rightList]="chosenAssigneelList"></app-dual-list>
                             <div style="height:30px"></div>
 
                             <div style="margin: 0 10px 30px 30px;">
-                                <label class="form-label" for="majorAssignee"><span style="color: tomato;">(*)</span> Người Xử lý Chính: </label>
+                                <label class="form-label" for="majorAssignee"><span style="color: tomato;">(*)</span>
+                                    Người Xử lý Chính: </label>
                                 <select style="width: 50%;" [(ngModel)]="majorAssignee" class="form-select" id="majorAssignee">
-                                    <option *ngFor="let assignee of ChosenAssigneelList">{{assignee.name}}</option>
+                                    <option selected>Chọn...</option>
+                                    <option [ngValue]="assignee" *ngFor="let assignee of chosenAssigneelList">{{assignee.fullName}}</option>
                                 </select>
                             </div>
 
-                            <button style="margin: 0 10px 0 30px;" class="btn btn-warning" awPreviousStep>Quay
+                            <button (click)="wizardNavbtnClicked(2,'previous')" style="margin: 0 10px 0 30px;" class="btn btn-warning">Quay
                                 Lại</button>
-                            <button class="btn btn-primary" awNextStep>Tiếp Tục</button>
+                            <button (click)="wizardNavbtnClicked(2,'next')" class="btn btn-primary">Tiếp Tục</button>
                         </div>
                     </div>
 

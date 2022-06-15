@@ -35,7 +35,7 @@ export class DualListComponent {
   public _leftList: BaseList;
   public _rightList: BaseList;
 
-  @Input() display: String = 'name';
+  @Input() display: String = 'fullName';
   @Input() leftTitle: String = 'Danh sách';
   @Input() rightTitle: String = 'Đã chọn';
 

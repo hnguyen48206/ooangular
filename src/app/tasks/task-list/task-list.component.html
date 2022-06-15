@@ -86,15 +86,17 @@
                                     <td>{{data.ngayBatDau}}</td>
                                     <td>{{data.ngayKetThucDuKien}}</td>
                                     <td>
-                                        <circle-progress
-                                        [percent]="getProgressInfo(data.ngayBatDau,data.ngayKetThucDuKien).percent"
+                                        <p style="font-weight: bold;
+                                        color: rgb(218, 92, 47);" *ngIf="data.progressInfo.isLate">{{data.progressInfo.displayText}}</p>
+                                        <circle-progress  *ngIf="!data.progressInfo.isLate"
+                                        [percent]="data.progressInfo.percent"
                                         [radius]="20"
                                         [outerStrokeWidth]="4"
                                         [innerStrokeWidth]="2"
-                                        [outerStrokeColor]="'#78C000'"
+                                        [outerStrokeColor]="data.progressInfo.outerStrokeColor"
                                         [innerStrokeColor]="'#C7E596'"
                                         [animation]="true"
-                                        [animationDuration]="300"
+                                        [animationDuration]="100"
                                         [showSubtitle]="false"
                                         [backgroundPadding]="0"
                                         [titleFontSize]="10"
@@ -136,7 +138,21 @@
                                     <td>{{data.nguoiTaoHoTen}}</td>
                                     <td>{{data.ngayBatDau}}</td>
                                     <td>{{data.ngayKetThucDuKien}}</td>
-                                    <td></td>
+                                    <td>   <p style="font-weight: bold;
+                                        color: rgb(218, 92, 47);" *ngIf="data.progressInfo.isLate">{{data.progressInfo.displayText}}</p>
+                                        <circle-progress  *ngIf="!data.progressInfo.isLate"
+                                        [percent]="data.progressInfo.percent"
+                                        [radius]="20"
+                                        [outerStrokeWidth]="4"
+                                        [innerStrokeWidth]="2"
+                                        [outerStrokeColor]="data.progressInfo.outerStrokeColor"
+                                        [innerStrokeColor]="'#C7E596'"
+                                        [animation]="true"
+                                        [animationDuration]="100"
+                                        [showSubtitle]="false"
+                                        [backgroundPadding]="0"
+                                        [titleFontSize]="10"></circle-progress>
+                                    </td>
                                     <td>{{data.nguoiXuLyChinhHoTen}}</td>
                                 </tr>
                             </tbody>
@@ -173,7 +189,22 @@
                                     <td>{{data.nguoiTaoHoTen}}</td>
                                     <td>{{data.ngayBatDau}}</td>
                                     <td>{{data.ngayKetThucDuKien}}</td>
-                                    <td></td>
+                                    <td>
+                                        <p style="font-weight: bold;
+                                        color: rgb(218, 92, 47);" *ngIf="data.progressInfo.isLate">{{data.progressInfo.displayText}}</p>
+                                        <circle-progress  *ngIf="!data.progressInfo.isLate"
+                                        [percent]="data.progressInfo.percent"
+                                        [radius]="20"
+                                        [outerStrokeWidth]="4"
+                                        [innerStrokeWidth]="2"
+                                        [outerStrokeColor]="data.progressInfo.outerStrokeColor"
+                                        [innerStrokeColor]="'#C7E596'"
+                                        [animation]="true"
+                                        [animationDuration]="100"
+                                        [showSubtitle]="false"
+                                        [backgroundPadding]="0"
+                                        [titleFontSize]="10"></circle-progress>
+                                    </td>
                                     <td>{{data.nguoiXuLyChinhHoTen}}</td>
                                 </tr>
                             </tbody>
