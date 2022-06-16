@@ -68,4 +68,25 @@ export class GeneralService {
   {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
+  cloneAnything(Obj) {
+    let buf; // the cloned object
+    if (Obj instanceof Array) {
+      buf = []; // create an empty array
+      var i = Obj.length;
+      while (i --) {
+        buf[i] = this.cloneAnything(Obj[i]); // recursively clone the elements
+      }
+      return buf;
+    } else if (Obj instanceof Object) {
+      buf = {}; // create an empty object
+      for (const k in Obj) {
+        if (Obj.hasOwnProperty(k)) { // filter out another array's index
+          buf[k] = this.cloneAnything(Obj[k]); // recursively clone the value
+        }     
+      }
+      return buf;
+    } else {
+      return Obj;
+    }
+  }
 }
