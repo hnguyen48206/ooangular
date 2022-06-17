@@ -147,6 +147,8 @@ export class ApiservicesService {
       let result = <any>res
       if (result.succeeded) {
         this.generalService.allUsers = result.data;
+        this.generalService.allUsersWithGroups = this.generalService.groupByKey(result.data,'groupChinhName')
+        this.generalService.allUserGroupsKey = Object.keys(this.generalService.allUsersWithGroups)
       }
     } catch (error) {
 

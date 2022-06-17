@@ -152,6 +152,15 @@
                     <div style="height:30px"></div>
                     <div class="card">
                         <div class="card-body">
+                            <div style="margin: 0 10px 30px 30px;">
+                                <label class="form-label" for="groupOfAssignee">
+                                    Lựa chọn danh sách từ: </label>
+                                <select style="width: 50%;" (change)="onAsigneeGroupChange($event)" [(ngModel)]="groupKeyChosenInStep2" class="form-select" id="groupOfAssignee">
+                                    <option value="all" selected>Tất cả nhân viên</option>
+                                    <option [ngValue]="groupKey" *ngFor="let groupKey of generalService.allUserGroupsKey">{{groupKey}}</option>
+                                </select>
+                            </div>
+
                             <app-dual-list
                                 (updateLists)="dualListUpdateForAssignee($event)"
                                 [leftList]="allUserInStep2List" [rightList]="chosenAssigneelList"></app-dual-list>
@@ -178,13 +187,23 @@
                     <div style="height:30px"></div>
                     <div class="card">
                         <div class="card-body">
-                            <!-- <app-dual-list (updateLists)="leftList=$event.leftList; rightList=$event.rightList"
-                                [leftList]="leftList" [rightList]="rightList"></app-dual-list>
-                            <div style="height:30px"></div> -->
+                            <div style="margin: 0 10px 30px 30px;">
+                                <label class="form-label" for="groupOfWatchable">
+                                    Lựa chọn danh sách từ: </label>
+                                <select style="width: 50%;" (change)="onWatchableGroupChange($event)" [(ngModel)]="groupKeyChosenInStep3" class="form-select" id="groupOfWatchable">
+                                    <option value="all" selected>Tất cả nhân viên</option>
+                                    <option [ngValue]="groupKey" *ngFor="let groupKey of generalService.allUserGroupsKey">{{groupKey}}</option>
+                                </select>
+                            </div>
+
+                            <app-dual-list
+                                (updateLists)="dualListUpdateForWatchable($event)"
+                                [leftList]="allUserInStep3List" [rightList]="chosenWatchablelList"></app-dual-list>
+                            <div style="height:30px"></div>
 
                             <div style="margin: 0 20px 20px 30px;">
                                 <div class="form-check form-check-inline form-checkbox-danger">
-                                    <input type="checkbox" class="form-check-input" id="urgentCheck">
+                                    <input [(ngModel)]="isUrgentTask" type="checkbox" class="form-check-input" id="urgentCheck">
                                     <label class="form-check-label" for="urgentCheck" style="color:tomato">Khẩn</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -195,7 +214,7 @@
 
                             <button style="margin: 0 10px 0 30px;" class="btn btn-warning" awPreviousStep>Quay
                                 Lại</button>
-                            <button class="btn btn-primary"><i class="uil-book-medical"></i> Tạo Công Việc</button>
+                            <button (click)="createNewTask()" class="btn btn-primary"><i class="uil-book-medical"></i> Tạo Công Việc</button>
                         </div>
                     </div>
 

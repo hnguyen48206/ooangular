@@ -52,17 +52,16 @@ export class NewTaskComponent implements OnInit {
     if (step == 1) {
       this.step1BtnClicked = true
       if (this.step1Validator())
-      this.wizardGoodToGo(direction)
+        this.wizardGoodToGo(direction)
     }
     else if (step == 2) {
       this.step2BtnClicked = true
-      if(direction == 'next')
-      {
-        if(this.step2Validator())
-        this.wizardGoodToGo(direction)
+      if (direction == 'next') {
+        if (this.step2Validator())
+          this.wizardGoodToGo(direction)
       }
       else
-      this.wizardGoodToGo(direction)
+        this.wizardGoodToGo(direction)
     }
     else if (step == 3) {
       this.step3BtnClicked = true
@@ -96,8 +95,8 @@ export class NewTaskComponent implements OnInit {
     // console.log(event.singleDate.formatted) 
   }
   ngOnInit(): void {
-    this.allUserInStep2List = this.generalService.cloneAnything(this.generalService.allUsers);
-    this.allUserInStep3List = this.generalService.cloneAnything(this.generalService.allUsers);
+    this.onAsigneeGroupChange(null)
+    this.onWatchableGroupChange(null)
   }
   ngOnDestroy(): void {
   }
@@ -131,75 +130,153 @@ export class NewTaskComponent implements OnInit {
   allUserInStep2List
   chosenAssigneelList: any[] = [
   ];
-
+  groupKeyChosenInStep2 = 'all'
   majorAssignee
-  dualListUpdateForAssignee(event)
-  {
-    this.allUserInStep2List=event.leftList; this.chosenAssigneelList=event.rightList
+  dualListUpdateForAssignee(event) {
+    this.allUserInStep2List = event.leftList; this.chosenAssigneelList = event.rightList
+    // if(this.groupKeyChosenInStep2 == 'all')
+    // {
+    //   for(let i=0; i< this.allUserInStep2List.length; ++i)
+    //   {
+    //     if(!this.containsObject(this.allUserInStep2List[i],this.generalService.allUsers))
+    //     this.allUserInStep2List.splice(i,1);
+    //   }
+    // }
+    // else
+    // {
+    //   for(let i=0; i< this.allUserInStep2List.length; ++i)
+    //   {
+    //     if(!this.containsObject(this.allUserInStep2List[i],this.generalService.allUsersWithGroups[`${this.groupKeyChosenInStep2}`]))
+    //     this.allUserInStep2List.splice(i,1);
+    //   }
+    // }
 
     //kiem tra xem majorAssignee đã chọn trước đó còn trong list chosen hay ko.
-    if(this.majorAssignee!=null)
-    {
-      let check=false;
-      for(let i=0; i<this.chosenAssigneelList.length;++i)
-      {
-        if(this.majorAssignee == this.chosenAssigneelList[i])
-        { check=true; break; }
+    if (this.majorAssignee != null) {
+      let check = false;
+      for (let i = 0; i < this.chosenAssigneelList.length; ++i) {
+        if (this.majorAssignee == this.chosenAssigneelList[i]) { check = true; break; }
       }
-      if(!check)
-      this.majorAssignee=null
+      if (!check)
+        this.majorAssignee = null
     }
   }
   step2Validator() {
-    if (this.chosenAssigneelList.length==0) {
+    if (this.chosenAssigneelList.length == 0) {
       this.generalService.showErrorToast(2, 'Vui lòng chọn danh sách người tham gia xử lý');
       return false;
     }
-    else if (this.majorAssignee==null) {
+    else if (this.majorAssignee == null) {
       this.generalService.showErrorToast(2, 'Vui lòng chọn người xử lý chính');
       return false;
     }
     else
       return true
   }
+
+  onAsigneeGroupChange(e) {
+    console.log(this.groupKeyChosenInStep2);
+    if (e == null || this.groupKeyChosenInStep2 == 'all') {
+      this.allUserInStep2List = this.generalService.cloneAnything(this.generalService.allUsers);
+    }
+    else {
+      this.allUserInStep2List = this.generalService.allUsersWithGroups[`${this.groupKeyChosenInStep2}`]
+    }
+  }
   //////////////////////////Step 3
 
   allUserInStep3List
-  chosenAudienceList: any[] = [
+  chosenWatchablelList: any[] = [
   ];
-
-  dualListUpdateForAudience(event)
-  {
-    this.allUserInStep3List=event.leftList; this.chosenAudienceList=event.rightList
+  groupKeyChosenInStep3 = 'all'
+  isUrgentTask = false;
+  dualListUpdateForWatchable(event) {
+    this.allUserInStep3List = event.leftList; this.chosenWatchablelList = event.rightList
+    // if(this.groupKeyChosenInStep3 == 'all')
+    // {
+    //   for(let i=0; i< this.allUserInStep3List.length; ++i)
+    //   {
+    //     if(!this.containsObject(this.allUserInStep3List[i],this.generalService.allUsers))
+    //     this.allUserInStep2List.splice(i,1);
+    //   }
+    // }
+    // else
+    // {
+    //   for(let i=0; i< this.allUserInStep3List.length; ++i)
+    //   {
+    //     if(!this.containsObject(this.allUserInStep3List[i],this.generalService.allUsersWithGroups[`${this.groupKeyChosenInStep3}`]))
+    //     this.allUserInStep3List.splice(i,1);
+    //   }
+    // }
   }
   step3Validator() {
+    // if (this.chosenWatchablelList.length==0) {
+    //   this.generalService.showErrorToast(2, 'Vui lòng chọn danh sách người tham gia xử lý');
+    //   return false;
+    // }
+    // else if (this.majorAssignee==null) {
+    //   this.generalService.showErrorToast(2, 'Vui lòng chọn người xử lý chính');
+    //   return false;
+    // }
+    // else
+    //   return true
+  }
+
+  onWatchableGroupChange(e) {
+    console.log(this.groupKeyChosenInStep3);
+    if (e == null || this.groupKeyChosenInStep3 == 'all') {
+      this.allUserInStep3List = this.generalService.cloneAnything(this.generalService.allUsers);
+    }
+    else {
+      this.allUserInStep3List = this.generalService.allUsersWithGroups[`${this.groupKeyChosenInStep3}`]
+    }
   }
 
   createNewTask() {
     let body = {
-      "chude": "string",
-      "msda": "string",
-      "noidung": "string",
-      "ngayBatDau": "string",
-      "ngayHoanThanhDuKien": "string",
-      "nguoiXuLyChinh": "string",
-      "laCongViecKhan": true,
-      "nguoiTao": "string",
+      "chude": this.taskName,
+      "msda": null,
+      "noidung": this.htmlContent,
+      "ngayBatDau": this.startDate.singleDate.formatted,
+      "ngayHoanThanhDuKien": this.endDate.singleDate.formatted,
+      "nguoiXuLyChinh": this.majorAssignee.userId,
+      "laCongViecKhan": this.isUrgentTask,
+      "nguoiTao": this.generalService.userData.userID,
       "participants": [
-        {
-          "nguoiXuLy": "string"
-        }
       ],
       "viewers": [
-        {
-          "nguoiDuocXem": "string"
-        }
       ]
     }
-
-    this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true)
+    this.chosenAssigneelList.forEach(element =>
+      body.participants.push({
+        "nguoiXuLy": element.userId
+      })
+    );
+    this.chosenWatchablelList.forEach(element =>
+      body.viewers.push({
+        "nguoiDuocXem": element.userId
+      })
+    );
+    
+    this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true).then(res=>{
+      console.log(res)
+    }).catch(err=>
+    {
+      console.log(err)
+    })
+    
   }
 
+  containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+      if (list[i] === obj) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 

@@ -35,6 +35,8 @@ export class DualListComponent {
   public _leftList: BaseList;
   public _rightList: BaseList;
 
+  original_leftList
+
   @Input() display: String = 'fullName';
   @Input() leftTitle: String = 'Danh sách';
   @Input() rightTitle: String = 'Đã chọn';
@@ -73,7 +75,11 @@ export class DualListComponent {
     fromList.base = fromList.base.filter(item => !(fromList.selected.indexOf(item) + 1));
     toList.base = toList.base.concat(fromList.selected);
     fromList.selectNone();
-
+    let tempA= this._leftList.base.filter((v,i,a)=>a.findIndex(v2=>(JSON.stringify(v2) === JSON.stringify(v)))===i)
+    let tempB = this._rightList.base.filter((v,i,a)=>a.findIndex(v2=>(JSON.stringify(v2) === JSON.stringify(v)))===i)
+ 
+    this._leftList.base = Array.from(tempA)
+    this._rightList.base = Array.from(tempB)
     this.updateLists.next({leftList: this._leftList.base, rightList: this._rightList.base});
   }
 }
