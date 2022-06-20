@@ -89,10 +89,10 @@ export class NewTaskComponent implements OnInit {
       return true
   }
   onStartDateChanged(event: IMyDateModel) {
-    // console.log(event.singleDate.formatted)   
+    console.log(event.singleDate)   
   }
   onEndDateChanged(event: IMyDateModel) {
-    // console.log(event.singleDate.formatted) 
+    console.log(event.singleDate) 
   }
   ngOnInit(): void {
     this.onAsigneeGroupChange(null)
@@ -235,10 +235,10 @@ export class NewTaskComponent implements OnInit {
   createNewTask() {
     let body = {
       "chude": this.taskName,
-      "msda": null,
+      "msda": '',
       "noidung": this.htmlContent,
-      "ngayBatDau": this.startDate.singleDate.formatted,
-      "ngayHoanThanhDuKien": this.endDate.singleDate.formatted,
+      "ngayBatDau": this.startDate.singleDate.date.month + '/' + this.startDate.singleDate.date.day + '/' + this.startDate.singleDate.date.year,
+      "ngayHoanThanhDuKien": this.endDate.singleDate.date.month + '/' + this.endDate.singleDate.date.day + '/' + this.endDate.singleDate.date.year,
       "nguoiXuLyChinh": this.majorAssignee.userId,
       "laCongViecKhan": this.isUrgentTask,
       "nguoiTao": this.generalService.userData.userID,
