@@ -31,7 +31,7 @@ import { TaskDetailComponent } from './task-detail/task-detail.component';
     UtilitiesModule,
     NgxPaginationModule,
     NgxLoadingModule.forRoot({}),
-    NgCircleProgressModule
+    NgCircleProgressModule,
   ],
   providers:[
     CircleProgressOptions

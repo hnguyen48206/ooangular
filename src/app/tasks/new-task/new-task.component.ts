@@ -16,7 +16,7 @@ import { WizardComponent } from 'angular-archwizard';
 export class NewTaskComponent implements OnInit {
   @ViewChild(WizardComponent)
   public wizard: WizardComponent;
-
+  spinnerLoading = false
   htmlContent = '';
   project = ''
   projectList
@@ -89,10 +89,10 @@ export class NewTaskComponent implements OnInit {
       return true
   }
   onStartDateChanged(event: IMyDateModel) {
-    console.log(event.singleDate)   
+    console.log(event.singleDate)
   }
   onEndDateChanged(event: IMyDateModel) {
-    console.log(event.singleDate) 
+    console.log(event.singleDate)
   }
   ngOnInit(): void {
     this.onAsigneeGroupChange(null)
@@ -232,7 +232,8 @@ export class NewTaskComponent implements OnInit {
     }
   }
 
-  createNewTask() {
+  async createNewTask() {
+    this.spinnerLoading = true
     let body = {
       "chude": this.taskName,
       "msda": '',
@@ -247,24 +248,25 @@ export class NewTaskComponent implements OnInit {
       "viewers": [
       ]
     }
-    this.chosenAssigneelList.forEach(element =>
-      body.participants.push({
-        "nguoiXuLy": element.userId
-      })
+    this.chosenAssigneelList.forEach(element => {
+      if (element.userId != this.majorAssignee.userId)
+        body.participants.push({
+          "nguoiXuLy": element.userId
+        })
+    }
     );
     this.chosenWatchablelList.forEach(element =>
       body.viewers.push({
         "nguoiDuocXem": element.userId
       })
     );
-    
-    this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true).then(res=>{
-      console.log(res)
-    }).catch(err=>
-    {
-      console.log(err)
-    })
-    
+    try {
+      await this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true);
+      this.spinnerLoading = false
+      this.generalService.showErrorToast(1, 'Tạo công việc mới thành công.')
+    } catch (error) {
+      this.spinnerLoading = false
+    }
   }
 
   containsObject(obj, list) {

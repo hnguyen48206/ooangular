@@ -41,6 +41,7 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            console.log(err)
             if(showErr)
             this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
@@ -58,6 +59,7 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            console.log(err)
             if(showErr)
             this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
@@ -75,6 +77,7 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            console.log(err)
             if(showErr)
             this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
@@ -92,6 +95,7 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            console.log(err)
             if(showErr)
             this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);
@@ -109,6 +113,7 @@ export class ApiservicesService {
             console.log(res);
             resolve(res);
           }, (err) => {
+            console.log(err)
             if(showErr)
             this.generalService.showErrorToast(0,'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
             reject(err);

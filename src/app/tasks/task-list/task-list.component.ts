@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiservicesService } from 'src/app/services/api.service';
 import { GeneralService } from 'src/app/services/general.service';
 import data from './task-list.language';
 import * as moment from 'moment';
-
+declare var bootstrap:any
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -30,12 +30,16 @@ export class TaskListComponent implements OnInit {
   pageSizes = [10, 20, 30];
 
   paginationConfig
-
+  myModal
 
   constructor(private el: ElementRef, private api: ApiservicesService, public generalService: GeneralService, private router: Router) {
   }
   ngOnInit(): void {
     this.getTaskList();
+    this.myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+      keyboard: false
+    })
+    console.log(this.myModal)
   }
   getLabel(key) {
     return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
@@ -50,7 +54,7 @@ export class TaskListComponent implements OnInit {
   }
 
   async getTaskList() {
-
+    this.spinnerLoading = true
     let options = {
       PageNumber: this.page,
       PageSize: this.pageSize,
@@ -109,6 +113,7 @@ export class TaskListComponent implements OnInit {
       this.spinnerLoading = false
     } catch (error) {
       this.spinnerLoading = false
+      this.myModal.toggle()
     }
 
   }
