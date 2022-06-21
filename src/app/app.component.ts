@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
     "assets/js/vendor/dataTables.responsive.min.js",
     "assets/js/vendor/responsive.bootstrap5.min.js"
   ];
-
-  constructor(public generalService: GeneralService, private router: Router, private api:ApiservicesService) { }
+  subBody
+  constructor(public generalService: GeneralService, private router: Router, private api: ApiservicesService) { }
 
   public loadJsFile(url) {
     const body = <HTMLDivElement>document.body;
@@ -37,6 +37,9 @@ export class AppComponent implements OnInit {
     this.loadConfigFile();
   }
   ngAfterViewInit(): void {
+    this.subBody = document.getElementById('subBody') as HTMLBodyElement;
+    this.subBody.classList.remove("hide-menu");
+    this.subBody.classList.add("sidebar-enable");
   }
 
   loadConfigFile() {
@@ -53,15 +56,14 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.log('Get config Failed')
     }
-
   }
 
   async getSavedUserInfo() {
-    let userData =  localStorage.getItem('userData');
-    let isRememberLogin =  localStorage.getItem('isRememberLogin');
+    let userData = localStorage.getItem('userData');
+    let isRememberLogin = localStorage.getItem('isRememberLogin');
 
     try {
-      if (userData!=null && isRememberLogin!=null && isRememberLogin=='1') {
+      if (userData != null && isRememberLogin != null && isRememberLogin == '1') {
         this.generalService.userData = JSON.parse(userData);
         this.generalService.isLogin = true;
         await this.autoLogin();
@@ -74,20 +76,19 @@ export class AppComponent implements OnInit {
     }
   }
 
-  async autoLogin()
-  {
+  async autoLogin() {
     try {
 
       let res = await this.api.httpCall(this.api.apiLists.login, {}, {
         "username": this.generalService.userData.userName,
         "password": this.generalService.userData.password
       }, 'post', true);
-  
+
       console.log(res)
       let result = <any>res
       result['password'] = this.generalService.userData.password
       localStorage.setItem('userData', JSON.stringify(result));
-    
+
       this.generalService.userData = result;
       this.generalService.isLogin = true;
       this.api.initDataFromServer();
