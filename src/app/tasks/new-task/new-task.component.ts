@@ -6,6 +6,7 @@ import { ApiservicesService } from 'src/app/services/api.service';
 import { GeneralService } from 'src/app/services/general.service';
 import * as moment from 'moment';
 import { WizardComponent } from 'angular-archwizard';
+import { Location, LocationChangeEvent } from '@angular/common';
 
 
 @Component({
@@ -47,7 +48,7 @@ export class NewTaskComponent implements OnInit {
   step2BtnClicked = false
   step3BtnClicked = false
 
-  constructor(private router: Router, private api: ApiservicesService, public generalService: GeneralService) { }
+  constructor(private location:Location, private router: Router, private api: ApiservicesService, public generalService: GeneralService) { }
   wizardNavbtnClicked(step, direction) {
     if (step == 1) {
       this.step1BtnClicked = true
@@ -264,6 +265,7 @@ export class NewTaskComponent implements OnInit {
       await this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true);
       this.spinnerLoading = false
       this.generalService.showErrorToast(1, 'Tạo công việc mới thành công.')
+      this.location.back()
     } catch (error) {
       this.spinnerLoading = false
     }
