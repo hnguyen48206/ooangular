@@ -16,25 +16,26 @@ export class ApiservicesService {
     getTasks:'/api/Tasks/GetAllTasks/',
     getTaskDetail: '/api/Tasks/GetTaskDetail/',
     createNewTask: '/api/Tasks/CreateNewTask',
-    getAllUserGroups: '/api/Groups/GetAllGroups'
+    getAllUserGroups: '/api/Groups/GetAllGroups',
+    uploadFile: '/api/File/Upload?subDirectory=',
+    downloadFile: '/api/File/Download'
   }
 
   constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
   }
   defaultTimeout = 10000
-  postFile(fileToUpload: [File], url, header, showErr) {
-    url = this.generalService.appConfig.API_BASE_URL + url;
+  postFile(fileToUpload: [File], url, header, taskID, showErr) {
+    url = this.generalService.appConfig.API_BASE_URL + url + `${taskID}%2F${this.generalService.currentUser.userId}`;
     if (this.generalService.userData != null) {
       header['Authorization'] = 'Bearer ' + this.generalService.userData.token;
       header['enctype'] = 'multipart/form-data';
     }
-    const endpoint = 'your-destination-url';
     const formData: FormData = new FormData();
     fileToUpload.forEach(file => {
-      formData.append('fileKey', file, file.name);
+      formData.append('formFiles', file, file.name);
     })
     return new Promise((resolve, reject) => {
-      this.httpClient.post(endpoint, formData, { headers: header }).subscribe(res => {
+      this.httpClient.post(url, formData, { headers: header }).subscribe(res => {
         console.log(res);
         resolve(res);
       }, (err) => {

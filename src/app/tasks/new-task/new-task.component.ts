@@ -49,7 +49,7 @@ export class NewTaskComponent implements OnInit {
   step2BtnClicked = false
   step3BtnClicked = false
 
-  constructor(private location:Location, private router: Router, private api: ApiservicesService, public generalService: GeneralService) { }
+  constructor(private location: Location, private router: Router, private api: ApiservicesService, public generalService: GeneralService) { }
   wizardNavbtnClicked(step, direction) {
     if (step == 1) {
       this.step1BtnClicked = true
@@ -126,25 +126,23 @@ export class NewTaskComponent implements OnInit {
     else
       return true
   }
-  handleFileInput(files: FileList)
-  {
+  handleFileInput(files: FileList) {
     this.fileToUpload = Array.from(files);
     console.log(this.fileToUpload)
   }
-  removeFileFromUploadList(index)
-  {
+  removeFileFromUploadList(index) {
     this.fileToUpload.splice(index, 1);
     const dt = new DataTransfer()
     const input = document.getElementById('fileList') as HTMLInputElement
     const { files } = input
-    
+
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
       if (index !== i)
         dt.items.add(file) // here you exclude the file. thus removing it.
     }
-    
-    input.files = dt.files 
+
+    input.files = dt.files
   }
   ////////////////////////Step 2
 
@@ -282,10 +280,18 @@ export class NewTaskComponent implements OnInit {
       })
     );
     try {
-      await this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true);
+      let result = await this.api.httpCall(this.api.apiLists.createNewTask, {}, body, 'post', true);
       this.spinnerLoading = false
       this.generalService.showErrorToast(1, 'Tạo công việc mới thành công.')
       this.location.back()
+      debugger
+      if (this.fileToUpload != null && this.fileToUpload.length > 0) {
+        try {
+          await this.api.postFile(this.fileToUpload, this.api.apiLists.uploadFile, {}, (result as any).mscv, false)
+        } catch (error) {
+
+        }
+      }
     } catch (error) {
       this.spinnerLoading = false
     }
