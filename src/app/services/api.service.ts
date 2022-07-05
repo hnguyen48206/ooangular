@@ -22,6 +22,30 @@ export class ApiservicesService {
   constructor(private httpClient: HttpClient, private router: Router, private generalService: GeneralService) {
   }
   defaultTimeout = 10000
+  postFile(fileToUpload: [File], url, header, showErr) {
+    url = this.generalService.appConfig.API_BASE_URL + url;
+    if (this.generalService.userData != null) {
+      header['Authorization'] = 'Bearer ' + this.generalService.userData.token;
+      header['enctype'] = 'multipart/form-data';
+    }
+    const endpoint = 'your-destination-url';
+    const formData: FormData = new FormData();
+    fileToUpload.forEach(file => {
+      formData.append('fileKey', file, file.name);
+    })
+    return new Promise((resolve, reject) => {
+      this.httpClient.post(endpoint, formData, { headers: header }).subscribe(res => {
+        console.log(res);
+        resolve(res);
+      }, (err) => {
+        console.log(err)
+        if (showErr)
+          this.generalService.showErrorToast(0, 'Đã xảy ra lỗi kết nối với hệ thống. Xin vui lòng thử lại.')
+        reject(err);
+      });
+    });
+
+  }
   httpCall(url, header, body, method, showErr) {
     url = this.generalService.appConfig.API_BASE_URL + url;
     if (this.generalService.userData != null) {
