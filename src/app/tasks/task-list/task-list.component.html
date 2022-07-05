@@ -97,7 +97,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <tbody *ngIf="currentAssignedTask!=null">
                                     <tr class="myTableRow" (click)="taskItemClick(data)"
                                         *ngFor="let data of currentAssignedTask | paginate: paginationConfig">
                                         <td>{{data.chude}}</td>
@@ -145,7 +145,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody *ngIf="currentForwardedTask!=null">
                                 <tr class="myTableRow" (click)="taskItemClick(data)"
                                     *ngFor="let data of currentForwardedTask | paginate: paginationConfig">
                                     <td>{{data.chude}}</td>
@@ -193,7 +193,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody *ngIf="currentWatchableTask!=null">
                                 <tr class="myTableRow" (click)="taskItemClick(data)"
                                     *ngFor="let data of currentWatchableTask | paginate: paginationConfig">
                                     <td>{{data.chude}}</td>
