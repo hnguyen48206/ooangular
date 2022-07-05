@@ -79,7 +79,7 @@ export class GeneralService {
         buf[i] = this.cloneAnything(Obj[i]); // recursively clone the elements
       }
       return buf;
-    } else if (Obj instanceof Object) {
+    } else if (Obj instanceof Object) { 
       buf = {}; // create an empty object
       for (const k in Obj) {
         if (Obj.hasOwnProperty(k)) { // filter out another array's index
