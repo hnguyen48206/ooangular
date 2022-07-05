@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <ngx-loading [show]="spinnerLoading"
-    [config]="{ primaryColour: 'whitesmoke', backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
+        [config]="{ primaryColour: 'whitesmoke', backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>
     <!-- start page title -->
     <div class="row">
         <div class="col-1 my-auto">
@@ -143,40 +143,50 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Thêm File:</label>
-                                <input type="file" class="form-control">
+                                <input multiple type="file" class="form-control">
+                                <ol *ngIf="fileToUpload!=null" class="list-group list-group-numbered">
+                                    <li *ngFor="let file of fileToUpload; index as i" class="list-group-item">
+                                        {{file.name}}<span (click)="removeFileFromUploadList(i)" style="    float: right;
+                                        font-weight: bold; cursor: pointer;
+                                        color: #fa6767;">X</span></li>
+                                </ol>
                             </div>
                         </div>
                     </div>
                     <button (click)="wizardNavbtnClicked(1,'next')" class="btn btn-primary">Tiếp Tục</button>
                 </aw-wizard-step>
-                <aw-wizard-step  stepTitle="2. Chọn Người Xử Lý">
+                <aw-wizard-step stepTitle="2. Chọn Người Xử Lý">
                     <div style="height:30px"></div>
                     <div class="card">
                         <div class="card-body">
                             <div style="margin: 0 10px 30px 30px;">
                                 <label class="form-label" for="groupOfAssignee">
                                     Lựa chọn danh sách từ: </label>
-                                <select style="width: 50%;" (change)="onAsigneeGroupChange($event)" [(ngModel)]="groupKeyChosenInStep2" class="form-select" id="groupOfAssignee">
+                                <select style="width: 50%;" (change)="onAsigneeGroupChange($event)"
+                                    [(ngModel)]="groupKeyChosenInStep2" class="form-select" id="groupOfAssignee">
                                     <option value="all" selected>Tất cả nhân viên</option>
-                                    <option [ngValue]="groupKey" *ngFor="let groupKey of generalService.allUserGroupsKey">{{groupKey}}</option>
+                                    <option [ngValue]="groupKey"
+                                        *ngFor="let groupKey of generalService.allUserGroupsKey">{{groupKey}}</option>
                                 </select>
                             </div>
 
-                            <app-dual-list
-                                (updateLists)="dualListUpdateForAssignee($event)"
+                            <app-dual-list (updateLists)="dualListUpdateForAssignee($event)"
                                 [leftList]="allUserInStep2List" [rightList]="chosenAssigneelList"></app-dual-list>
                             <div style="height:30px"></div>
 
                             <div style="margin: 0 10px 30px 30px;">
                                 <label class="form-label" for="majorAssignee"><span style="color: tomato;">(*)</span>
                                     Người Xử lý Chính: </label>
-                                <select style="width: 50%;" [(ngModel)]="majorAssignee" class="form-select" id="majorAssignee">
+                                <select style="width: 50%;" [(ngModel)]="majorAssignee" class="form-select"
+                                    id="majorAssignee">
                                     <option selected>Chọn...</option>
-                                    <option [ngValue]="assignee" *ngFor="let assignee of chosenAssigneelList">{{assignee.fullName}}</option>
+                                    <option [ngValue]="assignee" *ngFor="let assignee of chosenAssigneelList">
+                                        {{assignee.fullName}}</option>
                                 </select>
                             </div>
 
-                            <button (click)="wizardNavbtnClicked(2,'previous')" style="margin: 0 10px 0 30px;" class="btn btn-warning">Quay
+                            <button (click)="wizardNavbtnClicked(2,'previous')" style="margin: 0 10px 0 30px;"
+                                class="btn btn-warning">Quay
                                 Lại</button>
                             <button (click)="wizardNavbtnClicked(2,'next')" class="btn btn-primary">Tiếp Tục</button>
                         </div>
@@ -191,20 +201,22 @@
                             <div style="margin: 0 10px 30px 30px;">
                                 <label class="form-label" for="groupOfWatchable">
                                     Lựa chọn danh sách từ: </label>
-                                <select style="width: 50%;" (change)="onWatchableGroupChange($event)" [(ngModel)]="groupKeyChosenInStep3" class="form-select" id="groupOfWatchable">
+                                <select style="width: 50%;" (change)="onWatchableGroupChange($event)"
+                                    [(ngModel)]="groupKeyChosenInStep3" class="form-select" id="groupOfWatchable">
                                     <option value="all" selected>Tất cả nhân viên</option>
-                                    <option [ngValue]="groupKey" *ngFor="let groupKey of generalService.allUserGroupsKey">{{groupKey}}</option>
+                                    <option [ngValue]="groupKey"
+                                        *ngFor="let groupKey of generalService.allUserGroupsKey">{{groupKey}}</option>
                                 </select>
                             </div>
 
-                            <app-dual-list
-                                (updateLists)="dualListUpdateForWatchable($event)"
+                            <app-dual-list (updateLists)="dualListUpdateForWatchable($event)"
                                 [leftList]="allUserInStep3List" [rightList]="chosenWatchablelList"></app-dual-list>
                             <div style="height:30px"></div>
 
                             <div style="margin: 0 20px 20px 30px;">
                                 <div class="form-check form-check-inline form-checkbox-danger">
-                                    <input [(ngModel)]="isUrgentTask" type="checkbox" class="form-check-input" id="urgentCheck">
+                                    <input [(ngModel)]="isUrgentTask" type="checkbox" class="form-check-input"
+                                        id="urgentCheck">
                                     <label class="form-check-label" for="urgentCheck" style="color:tomato">Khẩn</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -215,7 +227,8 @@
 
                             <button style="margin: 0 10px 0 30px;" class="btn btn-warning" awPreviousStep>Quay
                                 Lại</button>
-                            <button (click)="createNewTask()" class="btn btn-primary"><i class="uil-book-medical"></i> Tạo Công Việc</button>
+                            <button (click)="createNewTask()" class="btn btn-primary"><i class="uil-book-medical"></i>
+                                Tạo Công Việc</button>
                         </div>
                     </div>
 

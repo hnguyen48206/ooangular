@@ -31,6 +31,7 @@ export class NewTaskComponent implements OnInit {
   startDate
   endDate
   unknownTimeCheck = false
+  fileToUpload
   public myDatePickerOptions: IAngularMyDpOptions = {
     dateFormat: 'dd/mm/yyyy',
   };
@@ -125,7 +126,26 @@ export class NewTaskComponent implements OnInit {
     else
       return true
   }
-
+  handleFileInput(files: FileList)
+  {
+    this.fileToUpload = Array.from(files);
+    console.log(this.fileToUpload)
+  }
+  removeFileFromUploadList(index)
+  {
+    this.fileToUpload.splice(index, 1);
+    const dt = new DataTransfer()
+    const input = document.getElementById('fileList') as HTMLInputElement
+    const { files } = input
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      if (index !== i)
+        dt.items.add(file) // here you exclude the file. thus removing it.
+    }
+    
+    input.files = dt.files 
+  }
   ////////////////////////Step 2
 
   allUserInStep2List
