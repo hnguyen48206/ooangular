@@ -16,12 +16,27 @@ export class LoginComponent implements OnInit {
   isRememberPassword = true;
   isLoggingIn = false;
 
+  content = {
+    element:null,
+    margin:null,
+    style:null
+  }
   constructor(private toaster: ToastrService, private router: Router, private generalService: GeneralService, private api: ApiservicesService) { }
 
   ngOnInit(): void {
     if (this.generalService.isLogin)
       this.router.navigate(['/home'])
   }
+  // ngAfterViewInit(): void {
+  //   this.content.element = document.getElementsByClassName('content-page')[0] as HTMLElement;
+  //   this.content.style = this.content.element.currentStyle || window.getComputedStyle(this.content.element);
+  //   this.content.margin = this.content.style.margin
+  //   this.content.element.style.margin='0px'
+  //   console.log(this.content.margin)
+  // }
+  // ngOnDestroy(): void {
+  //   this.content.element.style.margin=this.content.margin
+  // }
   async login() {
     if (!this.isLoggingIn) {
       this.isLoggingIn = true

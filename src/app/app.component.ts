@@ -8,6 +8,7 @@ import { GeneralService } from './services/general.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   externalJS = [
     "assets/js/vendor.min.js",
