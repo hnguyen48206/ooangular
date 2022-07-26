@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ApiservicesService } from './services/api.service';
 import { GeneralService } from './services/general.service';
 
@@ -10,6 +10,7 @@ import { GeneralService } from './services/general.service';
 })
 
 export class AppComponent implements OnInit {
+  isLoginPage=false
   externalJS = [
     "assets/js/vendor.min.js",
     "assets/js/app.min.js",
@@ -36,6 +37,16 @@ export class AppComponent implements OnInit {
       this.loadJsFile(this.externalJS[i]);
     }
     this.loadConfigFile();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // console.log(event.url)
+        if (event.url.includes('login')) {
+          this.isLoginPage = true;
+        } else {
+          this.isLoginPage = false;
+        }
+      }
+    });
   }
   ngAfterViewInit(): void {
     this.subBody = document.getElementById('subBody') as HTMLBodyElement;
