@@ -14,34 +14,50 @@
 
         <!--- Sidemenu -->
         <ul class="side-nav">
+            <!--
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarWorks" aria-expanded="false" aria-controls="sidebarEmail"
                     class="side-nav-link">
                     <i class="uil-calendar-alt"></i>
-                    <span> {{getLabel("taskMain")}} </span>
+                    <span> nothing </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarWorks">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a (click)="routeNavigator('/tasks/task-list')">{{getLabel("taskList")}}</a>
-                        </li>
-                        <!-- <li>
-                            <a >Chưa Duyệt</a>
+                            <a (click)="routeNavigator('/tasks/task-list')">a</a>
                         </li>
                         <li>
-                            <a >Đăng Ký</a>
+                            <a>Chưa Duyệt</a>
                         </li>
                         <li>
-                            <a >Lịch Tuần Mẫu</a>
+                            <a>Đăng Ký</a>
                         </li>
                         <li>
-                            <a >Địa Điểm</a>
-                        </li> -->
+                            <a>Lịch Tuần Mẫu</a>
+                        </li>
+                        <li>
+                            <a>Địa Điểm</a>
+                        </li>
                     </ul>
                 </div>
             </li>
-
+        -->
+            <li class="side-nav-item" *ngFor="let item of items">
+                <a data-bs-toggle="collapse" href="#{{item.id}}" aria-expanded="false" aria-controls="sidebarEmail"
+                    class="side-nav-link">
+                    <i class="{{item.icon}}"></i>
+                    <span> {{item[this.generalService.currentLanguage.Code].title}} </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="{{item.id}}">
+                    <ul class="side-nav-second-level">
+                        <li *ngFor="let child of item[this.generalService.currentLanguage.Code].items; let i = index">
+                            <a (click)="routeNavigator(item.id + item.routing[i])">{{child}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
 
         <div class="clearfix"></div>

@@ -6,28 +6,33 @@ import { RouteGuardService } from './services/route-guard.service';
 
 const routes: Routes = [
   {
-    path:'home',
+    path: 'home',
     component: HomeComponent
   },
   {
-    path:'login',
-    component:LoginComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    canActivate:[RouteGuardService],
-    path:'dashboard',
+    canActivate: [RouteGuardService],
+    path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-  }, 
+  },
   {
-    canActivate:[RouteGuardService],
-    path:'user',
+    canActivate: [RouteGuardService],
+    path: 'user',
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
-  }, 
+  },
   {
-    canActivate:[RouteGuardService],
-    path:'tasks',
+    canActivate: [RouteGuardService],
+    path: 'tasks',
     loadChildren: () => import('./tasks/task.module').then(m => m.TasksModule)
-  }, 
+  },
+  {
+    canActivate: [RouteGuardService],
+    path: 'social',
+    loadChildren: () => import('./social/social.module').then(m => m.SocialModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
