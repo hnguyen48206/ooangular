@@ -3,6 +3,9 @@ import { RouterModule, Routes } from "@angular/router";
 import { NotificationComponent } from '../social/notification/notification.component';
 import { NewsComponent } from './news/news.component';
 import { LibraryComponent } from './library/library.component';
+import { ImagesComponent } from './images/images.component';
+import { ContactComponent } from './contact/contact.component';
+import { SurveyComponent } from './survey/survey.component';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -26,6 +29,21 @@ const routes: Routes = [
                 data: { "link": "/social/library" },
                 path: 'library',
                 component: LibraryComponent
+            },
+            {
+                data: { "link": "/social/images" },
+                path: 'images',
+                component: ImagesComponent
+            },
+            {
+                data: { "link": "/social/contact" },
+                path: 'contact',
+                component: ContactComponent
+            },
+            {
+                data: { "link": "/social/survey" },
+                path: 'survey',
+                component: SurveyComponent
             },
         ]
     }

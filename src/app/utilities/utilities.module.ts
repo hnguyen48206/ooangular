@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DualListComponent } from './dual-list/dual-list.component';
+//import { CalendarComponent } from './calendar/calendar.component';
 
 
 @NgModule({
@@ -12,17 +13,18 @@ import { DualListComponent } from './dual-list/dual-list.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    DualListComponent
+    DualListComponent,
+    //CalendarComponent
   ],
   imports: [
-    CommonModule,  
+    CommonModule,
     RouterModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    DualListComponent    
+    DualListComponent
   ]
 })
 export class UtilitiesModule { }

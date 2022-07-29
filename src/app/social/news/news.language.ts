@@ -1,8 +1,10 @@
 let data = {
     'EN': {
         'pageTitle': 'News',
-        "newTask": "Add a news",
+        "addNews": "Add a news",
         "itemsPerPage": "Number of items per page",
+        "nextBtn": 'Next',
+        "previousBtn": 'Previous',
         'imgCol': 'Image',
         'titleCol': 'Title',
         'descriptionCol': 'Description',
@@ -11,8 +13,10 @@ let data = {
     },
     'VN': {
         'pageTitle': 'Tin tức',
-        "newTask": "Thêm tin mới",
+        "addNews": "Thêm tin mới",
         "itemsPerPage": "Số lượng thư mục mỗi trang",
+        "nextBtn": 'Trang sau',
+        "previousBtn": 'Trang trước',
         'imgCol': 'Hình ảnh',
         'titleCol': 'Tiêu đề',
         'descriptionCol': 'Nội dung',

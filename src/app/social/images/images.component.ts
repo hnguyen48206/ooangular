@@ -1,27 +1,27 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import data from './notification.language'
 import { GeneralService } from 'src/app/services/general.service';
-@Component({
-  selector: 'app-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
-})
-export class NotificationComponent implements OnInit {
-  notificationData = []
+import data from './images.language';
 
+@Component({
+  selector: 'app-images',
+  templateUrl: './images.component.html',
+  styleUrls: ['./images.component.css']
+})
+export class ImagesComponent implements OnInit {
+
+  constructor(private el: ElementRef, public generalService: GeneralService) { }
+  imagesData = []
   spinnerLoading = false;
   page = 0;
   pageSize = 10;
   pageSizes = [10, 20, 30];
   count = 500;
-
   config
-  constructor(private el: ElementRef, public generalService: GeneralService) { }
   ngOnInit(): void {
     this.gData()
   }
   gData() {
-    this.notificationData = []
+    this.imagesData = []
     for (let i = 0; i <= this.count; i++) {
       let randomDate = () => {
         let start = new Date(2012, 0, 1);
@@ -29,29 +29,37 @@ export class NotificationComponent implements OnInit {
         let date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
         return date;
       }
-      let randomText = () => {
+      let randomText = (length) => {
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < length; i++) {
+          result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+        }
+        return result;
+      }
+      let randomPhone = (length) => {
+        var result = '0';
+        var characters = '0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
           result += characters.charAt(Math.floor(Math.random() *
             charactersLength));
         }
         return result;
       }
       let d = {
-        title: randomText(),
-        description: randomText(),
-        date: randomDate(),
-        author: randomText(),
+        title: randomText(20),
+        img: `https://picsum.photos/id/${Math.floor(Math.random() * 200)}/300/300`,
       }
-      this.notificationData.push(d);
+      this.imagesData.push(d);
     }
     this.config = {
       id: 'paging',
       itemsPerPage: this.pageSize,
       currentPage: this.page,
-      totalItems: this.notificationData.length
+      totalItems: this.imagesData.length
     }
   }
   handlePageChange(event): void {

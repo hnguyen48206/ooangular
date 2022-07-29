@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-2 my-auto">
-            <abbr style="cursor: pointer;" [title]="getLabel('newFile')">
+            <abbr style="cursor: pointer;" [title]="getLabel('newBtn')">
                 <!--<img (click)="openNewTaskModal()" style="width:40px;height:auto; float: right !important;"
                     src="assets/imgs/plus.png" />-->
                 <img style="width:40px;height:auto; float: right !important;" src="assets/imgs/plus.png" />
@@ -40,15 +40,19 @@
         <thead>
             <tr>
                 <th>{{getLabel('numberCol')}}</th>
-                <th>{{getLabel('descriptionCol')}}</th>
-                <th>{{getLabel('dateCol')}}</th>
+                <th>{{getLabel('surveyList')}}</th>
+                <th>{{getLabel('questionCol')}}</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="myTableRow" *ngFor="let item of libraryData | paginate: config">
+            <tr class="myTableRow" *ngFor="let item of surveyData | paginate: config">
                 <td>{{item.number}}</td>
-                <td>{{item.des}}</td>
-                <td>{{item.date}}</td>
+                <td>
+                    <b>{{item.title}}</b>
+                    <br>
+                    {{item.startDate}} - {{item.endDate}}
+                </td>
+                <td>{{item.numberOfQuestion}} {{getLabel('questionLabel')}}</td>
             </tr>
         </tbody>
     </table>
