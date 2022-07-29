@@ -10,18 +10,16 @@ import data from './sidebar.language';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(public generalService: GeneralService, private router:Router) { }
-
+  constructor(public generalService: GeneralService, private router: Router) { }
+  items = data;
   ngOnInit() {
   }
 
-  routeNavigator(route)
-  {
+  routeNavigator(route) {
     this.router.navigate([route]);
   }
 
-  getLabel(key)
-  {
+  getLabel(key) {
     return data[`${this.generalService.currentLanguage.Code}`][`${key}`]
   }
 }
