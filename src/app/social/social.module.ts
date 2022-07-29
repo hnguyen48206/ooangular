@@ -7,14 +7,19 @@ import { NewsComponent } from './news/news.component';
 import { LibraryComponent } from './library/library.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxLoadingModule } from "ngx-loading";
-
+import { ImagesComponent } from './images/images.component';
+import { ContactComponent } from './contact/contact.component';
+import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
   declarations: [
     SocialComponent,
     NewsComponent,
     LibraryComponent,
-    NotificationComponent
+    NotificationComponent,
+    ImagesComponent,
+    ContactComponent,
+    SurveyComponent
   ],
   imports: [
     CommonModule,

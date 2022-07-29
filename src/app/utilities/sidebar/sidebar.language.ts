@@ -3,7 +3,7 @@ let data = [
     "id": "tasks",
     "EN": {
       "title": "Tasks",
-      "items": ["Task List", "Chưa duyệt [Eng]", "Đăng ký [Eng]", "Lịch tuần mẫu [Eng]", "Địa điểm [Eng]"]
+      "items": ["Task List", "Verify", "Đăng ký [Eng]", "Lịch tuần mẫu [Eng]", "Địa điểm [Eng]"]
     },
     "VN": {
       "title": "Công Việc",
@@ -19,21 +19,17 @@ let data = [
     'icon': 'uil-database-alt'
   },
   {
-    "id": "lichTuan",
+    "id": "event",
     "EN": {
-      "title": "Lich Tuan [Eng]",
-      "items": ["Đã duyệt [Eng]", "Chưa duyệt [Eng]", "Đăng ký [Eng]", "Location", "Lịch tuần mẫu [Eng]"]
+      "title": "Event",
+      "items": ["Event list"]
     },
     "VN": {
       "title": "Lịch tuần",
-      "items": ["Đã duyệt", "Chưa duyệt", "Đăng ký", "Địa điểm", "Lịch tuần mẫu"]
+      "items": ["Danh sách lịch"]
     },
     "routing": [
-      '',
-      '',
-      '',
-      '',
-      ''
+      '/event-list'
     ],
     'icon': 'uil-calendar-alt'
   },
@@ -47,7 +43,7 @@ let data = [
         "News",
         "Images",
         "Contact",
-        "Thăm dò khảo sát [Eng]"
+        "Survey"
       ]
     },
     "VN": {
@@ -67,7 +63,7 @@ let data = [
       '/news',
       '/images',
       '/contact',
-      '/suvery'
+      '/survey'
     ],
     'icon': 'uil-globe'
   }

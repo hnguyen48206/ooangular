@@ -1,21 +1,25 @@
 let data = {
     'EN': {
         'pageTitle': 'News',
-        "newTask": "Add a news",
+        "addNotification": "Add new notification",
         "itemsPerPage": "Number of items per page",
+        "nextBtn": 'Next',
+        "previousBtn": 'Previous',
         'titleCol': 'Title',
         'descriptionCol': 'Description',
         'dateCol':'Date',
-        'byCol':'By'
+        'authorCol':'Author'
     },
     'VN': {
-        'pageTitle': 'Tin tức',
-        "newTask": "Thêm tin mới",
+        'pageTitle': 'Thông báo',
+        "addNotification": "Tạo thông báo",
         "itemsPerPage": "Số lượng thư mục mỗi trang",
+        "nextBtn": 'Trang sau',
+        "previousBtn": 'Trang trước',
         'titleCol': 'Tiêu đề',
         'descriptionCol': 'Nội dung',
         'dateCol':'Ngày đăng',
-        'byCol':'Bởi'
+        'authorCol':'Tác giả'
     }
 }
 export default data;

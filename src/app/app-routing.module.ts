@@ -33,6 +33,11 @@ const routes: Routes = [
     path: 'social',
     loadChildren: () => import('./social/social.module').then(m => m.SocialModule)
   },
+  {
+    canActivate: [RouteGuardService],
+    path: 'event',
+    loadChildren: () => import('./event/event.module').then(m => m.EventModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
