@@ -4,7 +4,7 @@ import { ApiservicesService } from 'src/app/services/api.service';
 import { GeneralService } from 'src/app/services/general.service';
 import data from './task-list.language';
 import * as moment from 'moment';
-declare var bootstrap:any
+declare var bootstrap: any
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -215,7 +215,7 @@ export class TaskListComponent implements OnInit {
   }
   getProgressInfo(start: string, stop: string, realEnd: string) {
     let realEndDate
-    let displayText=''
+    let displayText = ''
     let isLate = false;
     let percent = 100;
     let outerStrokeColor = '#78C000'
