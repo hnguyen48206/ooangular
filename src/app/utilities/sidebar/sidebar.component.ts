@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
 
   routeNavigator(route) {
     this.router.navigate([route]);
+    this.router.isActive(route, true);
   }
 
   getLabel(key) {

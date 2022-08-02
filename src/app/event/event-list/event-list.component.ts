@@ -1,14 +1,13 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import data from './notification.language'
 import { GeneralService } from 'src/app/services/general.service';
+import data from './event.language'
 @Component({
-  selector: 'app-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  selector: 'app-event-list',
+  templateUrl: './event-list.component.html',
+  styleUrls: ['./event-list.component.css']
 })
-export class NotificationComponent implements OnInit {
-  notificationData = []
-
+export class EventListComponent implements OnInit {
+  eventListData = []
   spinnerLoading = false;
   page = 0;
   pageSize = 10;
@@ -17,11 +16,13 @@ export class NotificationComponent implements OnInit {
 
   config
   constructor(private el: ElementRef, public generalService: GeneralService) { }
+
   ngOnInit(): void {
-    this.gData()
+    this.gData();
   }
+
   gData() {
-    this.notificationData = []
+    this.eventListData = []
     for (let i = 0; i <= this.count; i++) {
       let randomDate = () => {
         let start = new Date(2012, 0, 1);
@@ -40,18 +41,19 @@ export class NotificationComponent implements OnInit {
         return result;
       }
       let d = {
+        date: randomDate(),
+        time: randomDate(),
         title: randomText(),
         description: randomText(),
-        date: randomDate(),
-        author: randomText(),
+        location: randomText(),
       }
-      this.notificationData.push(d);
+      this.eventListData.push(d);
     }
     this.config = {
       id: 'paging',
       itemsPerPage: this.pageSize,
       currentPage: this.page,
-      totalItems: this.notificationData.length
+      totalItems: this.eventListData.length
     }
   }
   handlePageChange(event): void {

@@ -1,25 +1,25 @@
 let data = {
-    'EN': {
-        'pageTitle': 'News',
-        "addNotification": "Add new notification",
+    "EN": {
+        "pageTitle": "Event list",
+        "newFile": "New event",
         "itemsPerPage": "Number of items per page",
         "nextBtn": 'Next',
         "previousBtn": 'Previous',
-        'titleCol': 'Title',
+        "dateCol": 'Date',
+        'timeCol': 'Time',
         'descriptionCol': 'Description',
-        'dateCol':'Date',
-        'authorCol':'Author'
+        'locationCol': 'Location'
     },
-    'VN': {
-        'pageTitle': 'Thông báo',
-        "addNotification": "Tạo thông báo",
+    "VN": {
+        "pageTitle": "Danh sách sự kiện",
+        "newFile": "Thêm lịch mới",
         "itemsPerPage": "Số lượng thư mục mỗi trang",
         "nextBtn": 'Trang sau',
         "previousBtn": 'Trang trước',
-        'titleCol': 'Tiêu đề',
+        "dateCol": 'Ngày',
+        'timeCol': 'Giờ',
         'descriptionCol': 'Nội dung',
-        'dateCol':'Ngày đăng',
-        'authorCol':'Tác giả'
+        'locationCol': 'Địa điểm'
     }
-}
+};
 export default data;
