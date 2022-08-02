@@ -1,27 +1,26 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import data from './notification.language'
 import { GeneralService } from 'src/app/services/general.service';
+import data from './survey.language';
 @Component({
-  selector: 'app-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  selector: 'app-survey',
+  templateUrl: './survey.component.html',
+  styleUrls: ['./survey.component.css']
 })
-export class NotificationComponent implements OnInit {
-  notificationData = []
+export class SurveyComponent implements OnInit {
 
+  constructor(private el: ElementRef, public generalService: GeneralService) { }
+  surveyData = []
   spinnerLoading = false;
   page = 0;
   pageSize = 10;
   pageSizes = [10, 20, 30];
   count = 500;
-
   config
-  constructor(private el: ElementRef, public generalService: GeneralService) { }
   ngOnInit(): void {
     this.gData()
   }
   gData() {
-    this.notificationData = []
+    this.surveyData = []
     for (let i = 0; i <= this.count; i++) {
       let randomDate = () => {
         let start = new Date(2012, 0, 1);
@@ -40,18 +39,19 @@ export class NotificationComponent implements OnInit {
         return result;
       }
       let d = {
+        number: i,
         title: randomText(),
-        description: randomText(),
-        date: randomDate(),
-        author: randomText(),
+        startDate: randomDate(),
+        endDate: randomDate(),
+        numberOfQuestion: Math.floor(Math.random() * 50)
       }
-      this.notificationData.push(d);
+      this.surveyData.push(d);
     }
     this.config = {
       id: 'paging',
       itemsPerPage: this.pageSize,
       currentPage: this.page,
-      totalItems: this.notificationData.length
+      totalItems: this.surveyData.length
     }
   }
   handlePageChange(event): void {

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { UtilitiesModule } from './utilities/utilities.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { SocialModule } from './social/social.module';
 
 @NgModule({
   declarations: [

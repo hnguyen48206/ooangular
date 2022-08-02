@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-2 my-auto">
-            <abbr style="cursor: pointer;" [title]="getLabel('pageTitle')">
+            <abbr style="cursor: pointer;" [title]="getLabel('addNotification')">
                 <!--<img (click)="openNewTaskModal()" style="width:40px;height:auto; float: right !important;"
                     src="assets/imgs/plus.png" />-->
                 <img style="width:40px;height:auto; float: right !important;" src="assets/imgs/plus.png" />
@@ -42,7 +42,7 @@
                 <th>{{getLabel('titleCol')}}</th>
                 <th>{{getLabel('descriptionCol')}}</th>
                 <th>{{getLabel('dateCol')}}</th>
-                <th>{{getLabel('byCol')}}</th>
+                <th>{{getLabel('authorCol')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
                 <td>{{item.title}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.date}}</td>
-                <td>{{item.by}}</td>
+                <td>{{item.author}}</td>
             </tr>
         </tbody>
     </table>
